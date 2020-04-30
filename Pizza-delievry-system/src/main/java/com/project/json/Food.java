@@ -1,97 +1,96 @@
 package com.project.json;
 
+import java.util.List;
+
+import com.project.entity.CartEntity;
+
 public class Food {
 
 	private long id;
-	private String userName;
-	private String firstName;
-	private String password;
-	private String email;
+	private String foodName;
+	private String foodType;
+	private String foodSize;
+	private int quantity;
+	private double price;
+	private List<CartEntity> cartList;
 	
 	public Food() {
 		super();
 	}
 
-	public Food(long id,String userName, String firstName, String password, String email) {
+	public Food(long id, String foodName, String foodType, String foodSize, int quantity, double price,
+			List<CartEntity> cartList) {
 		super();
-		this.id=id;
-		this.userName = userName;
-		this.firstName = firstName;
-		this.password = password;
-		this.email = email;
-	}
-
-
-
-	public Food(String userName, String password) {
-		super();
-		this.userName = userName;
-		this.password = password;
+		this.id = id;
+		this.foodName = foodName;
+		this.foodType = foodType;
+		this.foodSize = foodSize;
+		this.quantity = quantity;
+		this.price = price;
+		this.cartList = cartList;
 	}
 
 	public long getId() {
 		return id;
 	}
 
-
-
 	public void setId(long id) {
 		this.id = id;
 	}
 
-
-
-	public String getUserName() {
-		return userName;
+	public String getFoodName() {
+		return foodName;
 	}
 
-
-
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setFoodName(String foodName) {
+		this.foodName = foodName;
 	}
 
-
-
-	public String getFirstName() {
-		return firstName;
+	public String getFoodType() {
+		return foodType;
 	}
 
-
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFoodType(String foodType) {
+		this.foodType = foodType;
 	}
 
-
-
-	public String getPassword() {
-		return password;
+	public String getFoodSize() {
+		return foodSize;
 	}
 
-
-
-	public void setPassword(String password) {
-		this.password = password;
+	public void setFoodSize(String foodSize) {
+		this.foodSize = foodSize;
 	}
 
-
-
-	public String getEmail() {
-		return email;
+	public int getQuantity() {
+		return quantity;
 	}
 
-
-
-	public void setEmail(String email) {
-		this.email = email;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public List<CartEntity> getCartList() {
+		return cartList;
+	}
+
+	public void setCartList(List<CartEntity> cartList) {
+		this.cartList = cartList;
+	}
 
 	@Override
 	public String toString() {
-		return "UserEntity [id=" + id + ", userName=" + userName + ", firstName=" + firstName + ", password=" + password
-				+ ", email=" + email + "]";
+		return "Food [id=" + id + ", foodName=" + foodName + ", foodType=" + foodType + ", foodSize=" + foodSize
+				+ ", quantity=" + quantity + ", price=" + price + ", cartList=" + cartList + "]";
 	}
+	
 }
 
