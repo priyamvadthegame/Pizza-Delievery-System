@@ -1,4 +1,4 @@
-package com.spring.json;
+package com.project.json;
 
 public class Food {
 
@@ -7,20 +7,18 @@ public class Food {
 	private String firstName;
 	private String password;
 	private String email;
-	private String sessionId=null;
 	
 	public Food() {
 		super();
 	}
 
-	public Food(long id,String userName, String firstName, String password, String email, String sessionId) {
+	public Food(long id,String userName, String firstName, String password, String email) {
 		super();
 		this.id=id;
 		this.userName = userName;
 		this.firstName = firstName;
 		this.password = password;
 		this.email = email;
-		this.sessionId = sessionId;
 	}
 
 
@@ -90,22 +88,10 @@ public class Food {
 	}
 
 
-
-	public String getSessionId() {
-		return sessionId;
-	}
-
-
-
-	public void setSessionId(String sessionId) {
-		this.sessionId = sessionId;
-	}
-
-
-
 	@Override
 	public String toString() {
 		return "UserEntity [id=" + id + ", userName=" + userName + ", firstName=" + firstName + ", password=" + password
-				+ ", email=" + email + ", sessionId=" + sessionId + "]";
+				+ ", email=" + email + "]";
 	}
 }
+
