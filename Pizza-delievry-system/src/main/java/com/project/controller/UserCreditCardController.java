@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.json.CreditCardJson;
-import com.project.services.UserCreditCardService;
+import com.project.services.UserCreditCardServices;
 
 @RestController
 @RequestMapping("/user")
@@ -21,7 +21,7 @@ public class UserCreditCardController {
 	
 	
 	@Autowired
-	private UserCreditCardService userCreditCardService;
+	private UserCreditCardServices userCreditCardService;
 	
 	@RequestMapping(value="/creditcard",method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
 	public CreditCardJson addCreditCard(@RequestBody CreditCardJson creditCardDetails,@RequestHeader String apiKey) {

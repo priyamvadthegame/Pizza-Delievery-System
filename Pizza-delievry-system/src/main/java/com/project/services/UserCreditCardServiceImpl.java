@@ -15,8 +15,9 @@ import com.project.repositories.UserCreditCardRepository;
 import com.project.repositories.UserProfileRepository;
 import com.project.repositories.UserRepository;
 import com.project.utils.UserCreditCardUtils;
+
 @Service
-public class UserCreditCardServiceImpl implements UserCreditCardService {
+public class UserCreditCardServiceImpl implements UserCreditCardServices {
 
 	@Autowired
 	private static UserRepository userRepository;
