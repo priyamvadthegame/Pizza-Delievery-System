@@ -42,8 +42,7 @@ public class UserEntity {
 	@OneToMany(mappedBy = "user")
     private List<CartEntity> carts ;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "creditCardNumber")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "userId")
     private List<CreditCardEntity> cards;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

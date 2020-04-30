@@ -1,8 +1,11 @@
 package com.project.services;
 
 import java.util.List;
-import com.project.json.Food;
 
+import org.springframework.stereotype.Service;
+
+import com.project.json.Food;
+@Service
 public interface FoodService {
 
 	

@@ -3,6 +3,7 @@ package com.project.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -24,6 +25,7 @@ public class CreditCardEntity {
 	private double balance;
 	
 	@ManyToOne
+	@JoinColumn(name="userId")
 	private UserEntity userId;
 
 	public CreditCardEntity() {
