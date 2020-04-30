@@ -1,4 +1,4 @@
-package com.spring.entity;
+package com.project.entity;
 
 import java.util.List;
 
@@ -37,6 +37,8 @@ public class FoodEntity {
 	@Column(name = "FOOD_PRICE")
 	private double price;
 	
+	
+	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name="cart_id")
 	private List<CartEntity> cartList;
@@ -61,20 +63,6 @@ public class FoodEntity {
 		this.price = price;
 		this.cartList = cartList;
 	}
-	
-	public FoodEntity(long id, String foodtName, String foodType, String foodSize, int quantity, double price,
-			List<CartEntity> userList, String sessionId) {
-		super();
-		this.id = id;
-		this.foodName = foodtName;
-		this.foodType = foodType;
-		this.foodSize = foodSize;
-		this.quantity = quantity;
-		this.price = price;
-		this.cartList = cartList;
-		this.sessionId=sessionId;
-	}
-
 
 
 
@@ -173,5 +161,15 @@ public class FoodEntity {
 		this.cartList = cartList;
 	}
 
+
+
+
+	@Override
+	public String toString() {
+		return "FoodEntity [id=" + id + ", foodName=" + foodName + ", foodType=" + foodType + ", foodSize=" + foodSize
+				+ ", quantity=" + quantity + ", price=" + price + ", cartList=" + cartList + "]";
+	}
+	
+}
 
 
