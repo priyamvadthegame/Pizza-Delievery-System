@@ -7,20 +7,20 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "")
+@Table(name = "pos_tbl_creditcard")
 public class CreditCardEntity {
 
 	@Id
-	@Column(name = "")
+	@Column(name = "CreditCardint")
 	private String creditCardNumber;
 	
-	@Column(name = "")
+	@Column(name = "ValidFrom")
 	private String validFrom;
 	
-	@Column(name = "")
+	@Column(name = "ValidTo")
 	private String validTo;
 	
-	@Column(name = "")
+	@Column(name = "Balance")
 	private double balance;
 	
 	@ManyToOne
@@ -28,7 +28,7 @@ public class CreditCardEntity {
 
 	public CreditCardEntity() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public CreditCardEntity(String creditCardNumber, String validFrom, String validTo, double balance) {

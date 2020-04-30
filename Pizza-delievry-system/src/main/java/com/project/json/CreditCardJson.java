@@ -33,7 +33,7 @@ public class CreditCardJson {
 
 	public CreditCardJson() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 
