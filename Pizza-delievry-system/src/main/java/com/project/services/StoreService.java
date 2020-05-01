@@ -2,7 +2,6 @@ package com.project.services;
 
 import java.util.List;
 
-
 import com.project.json.StoreJson;
 
 public interface StoreService {
