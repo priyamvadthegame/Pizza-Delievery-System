@@ -12,7 +12,11 @@ public interface FoodRepository extends JpaRepository <FoodEntity, Long> {
 	List<FoodEntity> findById(long id);
 	List<FoodEntity> findByType(String foodType);
 	List<FoodEntity> findBySize(String foodSize);
-	FoodEntity save(FoodEntity convertFoodJsonToFoodEntity);
+
+
 	
 	
 }
+
+	
+

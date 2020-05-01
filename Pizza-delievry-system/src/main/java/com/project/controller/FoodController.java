@@ -29,8 +29,8 @@ public class FoodController {
 	}
 	
 	@PostMapping(value="/food", produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Food registerUser(@RequestBody Food food) {
-		return regService.save(food);
+	public @ResponseBody Food registerUser(@RequestBody Food food,@PathVariable(value="id")String id) {
+		return regService.save(food, id);
 	}
 
 	@PutMapping(value="/food/{id}", produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)

@@ -1,6 +1,6 @@
 package com.project.entity;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-
 
 @Entity
 @Table(name = "USER_CREDENTIALS")
@@ -39,14 +37,13 @@ public class UserEntity {
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "orderId")
-    private List<OrderEntity> orders = new ArrayList<OrderEntity>();
+    private List<OrderEntity> orders;
 	
 	@OneToMany(mappedBy = "user")
-    private List<CartEntity> carts = new ArrayList<CartEntity>();
+    private List<CartEntity> carts ;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "creditCardNumber")
-    private List<CreditCardEntity> cards = new ArrayList<CreditCardEntity>();
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "userId")
+    private List<CreditCardEntity> cards;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USERID")
@@ -56,12 +53,10 @@ public class UserEntity {
 		
 	}
 
-	public UserEntity(String password, String usertype, int loginstatus, String sessionId) {
+	public UserEntity(String password, String usertype) {
 		super();
 		this.password = password;
 		this.usertype = usertype;
-		this.loginstatus = loginstatus;
-		this.sessionId = sessionId;
 	}
 
 	public long getUserId() {
