@@ -35,8 +35,7 @@ public class UserEntity {
 	@Column(name = "LOGIN_STATUS")
 	private String loginStatus;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "orderId")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "userId")
     private List<OrderEntity> orders;
 	
 	@OneToMany(mappedBy = "user")

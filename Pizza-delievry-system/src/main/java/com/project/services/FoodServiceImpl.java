@@ -37,7 +37,7 @@ public class FoodServiceImpl implements FoodService {
 
 	@Override
 	public boolean delete(String id) {
-		List<UserEntity> userEntity=userRepository.findByLoginstatus(id);
+		List<UserEntity> userEntity=userRepository.findByLoginStatus(id);
 		
 		if(foodRepository.existsById(Long.valueOf(id)))
 		{
@@ -49,7 +49,7 @@ public class FoodServiceImpl implements FoodService {
 
 	@Override
 	public Food save(Food food,String id) {
-		List<UserEntity> userEntity=userRepository.findByLoginstatus(id);
+		List<UserEntity> userEntity=userRepository.findByLoginStatus(id);
 		
 	FoodEntity foodEntity=foodRepository.save(FoodUtils.convertFoodJsonToFoodEntity(food));
 		return FoodUtils.convertFoodEntityToFoodJson(foodEntity);
@@ -57,7 +57,7 @@ public class FoodServiceImpl implements FoodService {
 
 	@Override
 	public Food update(Food food, String id) {
-		List<UserEntity> userEntity=userRepository.findByLoginstatus(id);
+		List<UserEntity> userEntity=userRepository.findByLoginStatus(id);
 		FoodEntity foodEntity=foodRepository.findById(Long.valueOf(id)).get();
 		if(foodEntity!=null) {
 			foodEntity.setFoodName(foodEntity.getFoodName());

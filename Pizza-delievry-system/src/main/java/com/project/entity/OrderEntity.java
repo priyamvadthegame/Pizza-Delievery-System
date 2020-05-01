@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "order")
+@Table(name = "order_entity")
 public class OrderEntity {
 	
 	@GeneratedValue
@@ -42,11 +42,11 @@ public class OrderEntity {
 	
 	
 	@ManyToOne
-	@JoinColumn(name="user")
+	@JoinColumn(name = "orderId")
 	private UserEntity userId;
 	
 	
-	@OneToOne
+	@OneToOne(targetEntity = CartEntity.class)
 	private CartEntity cartId;
 
 	public OrderEntity() {

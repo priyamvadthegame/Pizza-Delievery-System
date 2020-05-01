@@ -10,7 +10,7 @@ import com.project.entity.UserEntity;
 @Component
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 	
-	List<UserEntity> findByLoginstatus(String sessionId);
+	List<UserEntity> findByLoginStatus(String sessionId);
 	List<UserEntity> findByUserId(long userId);
 	List<UserEntity> findByUsername(String username);
 }

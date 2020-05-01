@@ -10,7 +10,6 @@ import com.project.entity.FoodEntity;
 public interface FoodRepository extends JpaRepository <FoodEntity, Long> {
 
 	List<FoodEntity> findByFoodName(String foodName);
-	List<FoodEntity> findById(long id);
 	List<FoodEntity> findByFoodType(String foodType);
 	List<FoodEntity> findByFoodSize(String foodSize);
 }

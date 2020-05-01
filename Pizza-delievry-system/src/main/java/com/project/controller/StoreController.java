@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import com.project.json.Food;
 import com.project.json.StoreJson;
 
 
@@ -43,11 +46,14 @@ public class StoreController {
 		return storeService.filterStoreByFood(id);
 	}
 	
-	@GetMapping(value="/store/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<StoreJson> getFoodInStore(@PathVariable(value="id") Long id){
-
+	@PostMapping(value="/store/food", produces=MediaType.APPLICATION_JSON_VALUE)
+	public Food addFoodToStore(@RequestHeader(name = "foodId")long foodId,@RequestHeader(name = "storeId")long storeId,@RequestHeader(name = "authToken")String authToken){
+		return storeService.addFoodtoStore(foodId, storeId, authToken);
+	}
 	
-		return storeService.getFoodInStore(id);
+	@DeleteMapping(value="/store/food", produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Food> deleteFoodFromStore(@RequestHeader(name = "foodId")long foodId,@RequestHeader(name = "storeId")long storeId,@RequestHeader(name = "authToken")String authToken){
+		return storeService.deleteFoodFromStore(foodId, storeId, authToken);
 	}
 	
 	

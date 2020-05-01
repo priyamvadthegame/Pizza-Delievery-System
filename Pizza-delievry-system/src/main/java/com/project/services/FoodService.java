@@ -10,7 +10,7 @@ import com.project.json.Food;
 
 
 
-@Service
+
 public interface FoodService {
 
 	public boolean delete(String id);

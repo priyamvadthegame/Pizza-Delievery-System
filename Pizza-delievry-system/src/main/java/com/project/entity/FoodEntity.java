@@ -1,6 +1,7 @@
 package com.project.entity;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -37,6 +39,48 @@ public class FoodEntity {
 	@Column(name = "FOOD_PRICE")
 	private double price;
 	
+	@ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                CascadeType.PERSIST,
+                CascadeType.MERGE
+            },
+            mappedBy = "foodList")
+	private Set<StoreEntity> storeList;
+
+	
+
+
+
+
+	public Set<StoreEntity> getStoreList() {
+		return storeList;
+	}
+
+
+
+
+	public void setStoreList(Set<StoreEntity> storeList) {
+		this.storeList = storeList;
+	}
+
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FoodEntity other = (FoodEntity) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+
 
 
 	public FoodEntity() {

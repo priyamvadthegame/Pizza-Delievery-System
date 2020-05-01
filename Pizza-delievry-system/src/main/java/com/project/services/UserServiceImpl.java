@@ -60,14 +60,14 @@ public class UserServiceImpl implements UserService {
 	
 	public UserProfileJson userInfo(String authToken)
 	{
-		UserEntity userEntity = userRepository.findByLoginstatus(authToken).get(0);
+		UserEntity userEntity = userRepository.findByLoginStatus(authToken).get(0);
 		UserProfileEntity userprofileEntity = userprofileRepository.findByUserId(userEntity.getUserId()).get(0);
 		return UserUtils.convertUserProfileEntityToUserProfileJson(userprofileEntity);
 	}
 	
 	public String logout(String authToken)
 	{
-		List<UserEntity> userList = userRepository.findByLoginstatus(authToken);
+		List<UserEntity> userList = userRepository.findByLoginStatus(authToken);
 		if (authToken.equals(null) || userList == null || userList.size() == 0)
 		{
 			return "{\"result\": \"Invalid LoginStatus\"}";

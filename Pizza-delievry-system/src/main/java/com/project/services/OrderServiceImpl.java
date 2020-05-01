@@ -90,7 +90,7 @@ public class OrderServiceImpl implements OrderService {
 
 	public static  UserEntity getUserEntityBySessionId(String sessionId)
 	{
-		List<UserEntity> userEntity=userRepository.findByLoginstatus(sessionId);
+		List<UserEntity> userEntity=userRepository.findByLoginStatus(sessionId);
 		
 		if(userEntity!=null&&userEntity.size()>0)
 		{

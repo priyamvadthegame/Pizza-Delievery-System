@@ -2,41 +2,51 @@ package com.project.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+
 @Entity
-@Table(name = "")
+@Table(name = "store_entity")
 public class StoreEntity {
 	
 	@GeneratedValue
 	@Id
-	@Column(name = "")
+	@Column(name = "store_id")
 	private long storeId;
 	
-	@Column(name = "")
+	@Column(name = "store_name")
 	private String storeName;
 	
-	@Column(name = "")
+	@Column(name = "store_street")
 	private String storeStreet;
 	
-	@Column(name = "")
+	@Column(name = "store_mobile")
 	private int storeMobileNo;
 	
-	@Column(name = "")
+	@Column(name = "store_city")
 	private String storeCity;
 	
-	@Column(name = "")
+	@Column(name = "store_state")
 	private long storeState;
 	
-	@Column(name = "")
+	@Column(name = "store_pincode")
 	private long storePincode;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                CascadeType.PERSIST,
+                CascadeType.MERGE
+            })
+	@JoinTable(name = "store_food_table",joinColumns = {@JoinColumn(name = "store_id")},inverseJoinColumns= {@JoinColumn(name ="food_id")})
 	private Set<FoodEntity> foodList;
 
 	public StoreEntity() {
