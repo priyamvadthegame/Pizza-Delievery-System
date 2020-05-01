@@ -2,9 +2,9 @@ package com.project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,7 +35,7 @@ public class UserController {
 		return userService.userInfo(authToken);
 	}
 	
-	@DeleteMapping(value="/user/logout", produces=MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value="/user/logout", produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody String logoutUser(@RequestHeader(name="auth-token") String authToken) {
 		return userService.logout(authToken);
 	}
