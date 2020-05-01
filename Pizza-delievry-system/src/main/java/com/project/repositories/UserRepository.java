@@ -11,7 +11,6 @@ import com.project.entity.UserEntity;
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 	
 	List<UserEntity> findByLoginstatus(String sessionId);
-	UserEntity findByUserId(long userId);
-	UserEntity findBySessionId(String authToken);
-	UserEntity deleteBySessionId(String authToken);
+	List<UserEntity> findByUserId(long userId);
+	List<UserEntity> findByUsername(String username);
 }

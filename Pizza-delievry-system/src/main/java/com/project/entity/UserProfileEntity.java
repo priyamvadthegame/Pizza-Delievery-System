@@ -51,7 +51,7 @@ public class UserProfileEntity {
 	@Column(name = "EMAIL_ID")
 	private String emailId;
 	
-	@OneToOne(mappedBy="userprofile")
+	@OneToOne(mappedBy = "userprofile")
 	private UserEntity user;
 	
 	public UserProfileEntity() {
@@ -203,30 +203,6 @@ public class UserProfileEntity {
 				+ ", state=" + state + ", pincode=" + pincode + ", mobileno=" + mobileno + ", emailId=" + emailId
 				+ ", user=" + user + "]";
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }

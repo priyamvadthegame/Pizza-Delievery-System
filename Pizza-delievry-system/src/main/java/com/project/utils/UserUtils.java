@@ -1,22 +1,38 @@
 package com.project.utils;
 
+import com.project.entity.UserEntity;
 import com.project.entity.UserProfileEntity;
+import com.project.json.UserJson;
 import com.project.json.UserProfileJson;
 
 public class UserUtils {
 	
-	public static UserProfileEntity convertUserProfileJsonToUserProfileEntity(UserProfileJson userJson)
+	public static UserProfileEntity convertUserProfileJsonToUserProfileEntity(UserProfileJson userprofileJson)
 	{
-		return new UserProfileEntity(userJson.getFirstname(), userJson.getLastname(), userJson.getDob(), userJson.getGender(),
-			userJson.getStreet(), userJson.getLocation(), userJson.getCity(), userJson.getState(), userJson.getPincode(),
-			userJson.getMobileno(), userJson.getEmailId(), userJson.getUser());
+		return new UserProfileEntity(userprofileJson.getFirstname(), userprofileJson.getLastname(), userprofileJson.getDob(), userprofileJson.getGender(),
+			userprofileJson.getStreet(), userprofileJson.getLocation(), userprofileJson.getCity(), userprofileJson.getState(), userprofileJson.getPincode(),
+			userprofileJson.getMobileno(), userprofileJson.getEmailId());
 	}
 	
-	public static UserProfileJson convertUserProfileEntityToUserProfileJson(UserProfileEntity user)
+	public static UserProfileJson convertUserProfileEntityToUserProfileJson(UserProfileEntity userprofileEntity)
 	{
-		return new UserProfileJson(user.getFirstname(), user.getLastname(), user.getDob(), user.getGender(),
-			user.getStreet(), user.getLocation(), user.getCity(), user.getState(), user.getPincode(),
-			user.getMobileno(), user.getEmailId(), user.getUser());
+		return new UserProfileJson(userprofileEntity.getFirstname(), userprofileEntity.getLastname(), userprofileEntity.getDob(), userprofileEntity.getGender(),
+			userprofileEntity.getStreet(), userprofileEntity.getLocation(), userprofileEntity.getCity(), userprofileEntity.getState(), userprofileEntity.getPincode(),
+			userprofileEntity.getMobileno(), userprofileEntity.getEmailId());
 	}
+	
+	public static UserEntity convertUserJsonToUserEntity(UserJson userJson)
+	{
+		return new UserEntity(userJson.getUsername(), userJson.getPassword(), userJson.getUsertype(), userJson.getLoginstatus());
+		
+	}
+	
+	public static UserJson convertUserEntityToUserJson(UserEntity userEntity)
+	{
+		return new UserJson(userEntity.getUsername(), userEntity.getPassword(), userEntity.getUsertype(), userEntity.getLoginStatus());
+		
+	}
+	
+	
 
 }

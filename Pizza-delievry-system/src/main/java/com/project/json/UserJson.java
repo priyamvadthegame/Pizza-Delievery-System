@@ -3,60 +3,61 @@ package com.project.json;
 public class UserJson {
 	
 	private long userId;
+	
+	private String username;
 
 	private String password;
 
 	private String usertype;
 
-	private int loginstatus;
-
-	private String sessionId;
+	private String loginstatus;
 	
 	private UserProfileJson userprofile;
 	
 	public UserJson() {
 		
 	}
-	
-	public UserJson(String password, String usertype, int loginstatus, String sessionId, UserProfileJson userprofile) {
-		super();
-		this.password = password;
-		this.usertype = usertype;
-		this.loginstatus = loginstatus;
-		this.sessionId = sessionId;
-		this.userprofile = userprofile;
-	}
 
-	public UserJson(String password, String usertype, int loginstatus, UserProfileJson userprofile) {
-		super();
-		this.password = password;
-		this.usertype = usertype;
-		this.loginstatus = loginstatus;
-		this.userprofile = userprofile;
-	}
-
-	public UserJson(long userId, String password, String usertype, int loginstatus, String sessionId) {
+	public UserJson(long userId, String username, String password, String usertype, String loginstatus,
+			UserProfileJson userprofile) {
 		super();
 		this.userId = userId;
+		this.username = username;
 		this.password = password;
 		this.usertype = usertype;
 		this.loginstatus = loginstatus;
-		this.sessionId = sessionId;
+		this.userprofile = userprofile;
 	}
 
-	public UserJson(String password, String usertype, int loginstatus) {
+	public UserJson(String username, String password, String usertype, String loginstatus,
+			UserProfileJson userprofile) {
 		super();
+		this.username = username;
+		this.password = password;
+		this.usertype = usertype;
+		this.loginstatus = loginstatus;
+		this.userprofile = userprofile;
+	}
+
+	public UserJson(String username, String password, String usertype, String loginstatus) {
+		super();
+		this.username = username;
 		this.password = password;
 		this.usertype = usertype;
 		this.loginstatus = loginstatus;
 	}
 
-	public UserJson(String password, String usertype, int loginstatus, String sessionId) {
+	public UserJson(String username, String password, String usertype) {
 		super();
+		this.username = username;
 		this.password = password;
 		this.usertype = usertype;
-		this.loginstatus = loginstatus;
-		this.sessionId = sessionId;
+	}
+
+	public UserJson(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
 	}
 
 	public long getUserId() {
@@ -65,6 +66,14 @@ public class UserJson {
 
 	public void setUserId(long userId) {
 		this.userId = userId;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -83,20 +92,12 @@ public class UserJson {
 		this.usertype = usertype;
 	}
 
-	public int getLoginstatus() {
+	public String getLoginstatus() {
 		return loginstatus;
 	}
 
-	public void setLoginstatus(int loginstatus) {
+	public void setLoginstatus(String loginstatus) {
 		this.loginstatus = loginstatus;
-	}
-
-	public String getSessionId() {
-		return sessionId;
-	}
-
-	public void setSessionId(String sessionId) {
-		this.sessionId = sessionId;
 	}
 
 	public UserProfileJson getUserprofile() {
@@ -109,10 +110,9 @@ public class UserJson {
 
 	@Override
 	public String toString() {
-		return "UserJson [userId=" + userId + ", password=" + password + ", usertype=" + usertype + ", loginstatus="
-				+ loginstatus + ", sessionId=" + sessionId + ", userprofile=" + userprofile + "]";
+		return "UserJson [userId=" + userId + ", username=" + username + ", password=" + password + ", usertype="
+				+ usertype + ", loginstatus=" + loginstatus + ", userprofile=" + userprofile + "]";
 	}
-
 	
 	
 	

@@ -23,7 +23,9 @@ public class UserEntity {
 	@Column(name = "USERID")
 	private long userId;
 
+	@Column(name = "USERNAME")
 	private String username;
+	
 	@Column(name = "PASSWORD")
 	private String password;
 	
@@ -31,16 +33,16 @@ public class UserEntity {
 	private String usertype;
 	
 	@Column(name = "LOGIN_STATUS")
-	private String loginstatus;
+	private String loginStatus;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "orderId")
     private List<OrderEntity> orders;
 	
 	@OneToMany(mappedBy = "user")
-    private List<CartEntity> carts ;
+    private List<CartEntity> carts;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "userId")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userId")
     private List<CreditCardEntity> cards;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -50,18 +52,26 @@ public class UserEntity {
 	public UserEntity() {
 		
 	}
-	
-	public UserEntity(String password, String usertype, int loginstatus) {
+
+	public UserEntity(String username, String password, String usertype) {
 		super();
+		this.username = username;
 		this.password = password;
 		this.usertype = usertype;
-		this.loginstatus = loginstatus;
 	}
 
-	public UserEntity(String password, String usertype) {
+	public UserEntity(String username, String password, String usertype, String loginStatus) {
 		super();
+		this.username = username;
 		this.password = password;
 		this.usertype = usertype;
+		this.loginStatus = loginStatus;
+	}
+
+	public UserEntity(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
 	}
 
 	public long getUserId() {
@@ -70,6 +80,14 @@ public class UserEntity {
 
 	public void setUserId(long userId) {
 		this.userId = userId;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -88,12 +106,12 @@ public class UserEntity {
 		this.usertype = usertype;
 	}
 
-	public int getLoginstatus() {
-		return loginstatus;
+	public String getLoginStatus() {
+		return loginStatus;
 	}
 
-	public void setLoginstatus(int loginstatus) {
-		this.loginstatus = loginstatus;
+	public void setLoginStatus(String loginStatus) {
+		this.loginStatus = loginStatus;
 	}
 
 	public List<OrderEntity> getOrders() {
@@ -128,25 +146,12 @@ public class UserEntity {
 		this.userprofile = userprofile;
 	}
 
-	public String getSessionId() {
-		return sessionId;
-	}
-
-	public void setSessionId(String sessionId) {
-		this.sessionId = sessionId;
-	}
-
 	@Override
 	public String toString() {
-		return "UserEntity [userId=" + userId + ", password=" + password + ", usertype=" + usertype + ", loginstatus="
-				+ loginstatus + ", sessionId=" + sessionId + ", orders=" + orders + ", carts=" + carts + ", cards="
+		return "UserEntity [userId=" + userId + ", username=" + username + ", password=" + password + ", usertype="
+				+ usertype + ", loginStatus=" + loginStatus + ", orders=" + orders + ", carts=" + carts + ", cards="
 				+ cards + ", userprofile=" + userprofile + "]";
 	}
-
-	
-
-	
-	
 	
 	
 
