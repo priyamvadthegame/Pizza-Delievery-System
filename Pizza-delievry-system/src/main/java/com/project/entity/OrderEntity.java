@@ -38,11 +38,11 @@ public class OrderEntity {
 	@Column(name = "")
 	private int mobileNo;
 	
-	@Column(name = "")
+	
 	@ManyToOne
 	private UserEntity userId;
 	
-	@Column(name = "")
+	
 	@OneToOne
 	private CartEntity cartId;
 

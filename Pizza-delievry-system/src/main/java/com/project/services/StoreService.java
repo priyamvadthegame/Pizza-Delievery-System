@@ -2,6 +2,8 @@ package com.project.services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.project.json.StoreJson;
 
 public interface StoreService {

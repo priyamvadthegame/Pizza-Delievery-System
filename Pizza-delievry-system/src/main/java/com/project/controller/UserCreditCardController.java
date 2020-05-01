@@ -33,12 +33,12 @@ public class UserCreditCardController {
 		return userCreditCardService.verify(creditCardNumber,apiKey);
 	}
 	
-	@RequestMapping(value="/creditcard/verify",method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/creditcard",method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public CreditCardJson deleteCreditCard(@RequestHeader String creditCardNumber,@RequestHeader String apiKey) {
 		return userCreditCardService.delete(creditCardNumber,apiKey);
 	}
 	
-	@RequestMapping(value="/creditcard/verify",method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/creditcard",method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<CreditCardJson> getAllCreditCardOfAUser(@RequestHeader String apiKey) {
 		return userCreditCardService.getAllCreditCards(apiKey);
 	}

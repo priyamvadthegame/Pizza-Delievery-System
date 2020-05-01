@@ -32,7 +32,7 @@ public class CartEntity {
 	@Column(name = "")
 	private int foodId;
 	
-	@Column(name = "")
+	
 	@ManyToOne
 	private UserEntity user;
 	

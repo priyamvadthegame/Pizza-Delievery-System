@@ -37,13 +37,7 @@ public class FoodEntity {
 	@Column(name = "FOOD_PRICE")
 	private double price;
 	
-	
-	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name="cart_id")
-	private List<CartEntity> cartList;
 
-	
 
 	public FoodEntity() {
 		super();
@@ -52,8 +46,8 @@ public class FoodEntity {
 
 
 
-	public FoodEntity(long id, String foodtName, String foodType, String foodSize, int quantity, double price,
-			List<CartEntity> cartList) {
+	public FoodEntity(long id, String foodtName, String foodType, String foodSize, int quantity, double price
+	) {
 		super();
 		this.id = id;
 		this.foodName = foodtName;
@@ -61,7 +55,7 @@ public class FoodEntity {
 		this.foodSize = foodSize;
 		this.quantity = quantity;
 		this.price = price;
-		this.cartList = cartList;
+
 	}
 
 
@@ -150,24 +144,13 @@ public class FoodEntity {
 
 
 
-	public List<CartEntity> getCartList() {
-		return cartList;
-	}
-
-
-
-
-	public void setCartList(List<CartEntity> cartList) {
-		this.cartList = cartList;
-	}
-
 
 
 
 	@Override
 	public String toString() {
 		return "FoodEntity [id=" + id + ", foodName=" + foodName + ", foodType=" + foodType + ", foodSize=" + foodSize
-				+ ", quantity=" + quantity + ", price=" + price + ", cartList=" + cartList + "]";
+				+ ", quantity=" + quantity + ", price=" + price + "]";
 	}
 	
 }

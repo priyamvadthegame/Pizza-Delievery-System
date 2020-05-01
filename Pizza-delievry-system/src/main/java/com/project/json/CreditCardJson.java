@@ -4,7 +4,7 @@ package com.project.json;
 
 public class CreditCardJson {
 	
-	private String creditCardNumber;
+	private Long creditCardNumber;
 	
 	
 	private String validFrom;
@@ -16,12 +16,12 @@ public class CreditCardJson {
 	private double balance;
 
 
-	public String getCreditCardNumber() {
+	public Long getCreditCardNumber() {
 		return creditCardNumber;
 	}
 
 
-	public void setCreditCardNumber(String creditCardNumber) {
+	public void setCreditCardNumber(Long creditCardNumber) {
 		this.creditCardNumber = creditCardNumber;
 	}
 
@@ -37,7 +37,7 @@ public class CreditCardJson {
 	}
 
 
-	public CreditCardJson(String creditCardNumber, String validFrom, String validTo, double balance) {
+	public CreditCardJson(Long creditCardNumber, String validFrom, String validTo, double balance) {
 		super();
 		this.creditCardNumber = creditCardNumber;
 		this.validFrom = validFrom;

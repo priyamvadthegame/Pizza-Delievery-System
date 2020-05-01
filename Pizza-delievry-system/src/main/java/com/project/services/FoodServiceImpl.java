@@ -53,7 +53,6 @@ public class FoodServiceImpl implements FoodService {
 			foodEntity.setFoodSize(foodEntity.getFoodSize());
 			foodEntity.setQuantity(foodEntity.getQuantity());
 			foodEntity.setPrice(foodEntity.getPrice());
-			foodEntity.setCartList(foodEntity.getCartList());
 			return FoodUtils.convertFoodEntityToFoodJson(foodEntity);
 			
 		}

@@ -12,14 +12,13 @@ public class Food {
 	private String foodSize;
 	private int quantity;
 	private double price;
-	private List<CartEntity> cartList;
 	
 	public Food() {
 		super();
 	}
 
-	public Food(long id, String foodName, String foodType, String foodSize, int quantity, double price,
-			List<CartEntity> cartList) {
+	public Food(long id, String foodName, String foodType, String foodSize, int quantity, double price
+			) {
 		super();
 		this.id = id;
 		this.foodName = foodName;
@@ -27,7 +26,7 @@ public class Food {
 		this.foodSize = foodSize;
 		this.quantity = quantity;
 		this.price = price;
-		this.cartList = cartList;
+		
 	}
 
 	public long getId() {
@@ -78,18 +77,11 @@ public class Food {
 		this.price = price;
 	}
 
-	public List<CartEntity> getCartList() {
-		return cartList;
-	}
-
-	public void setCartList(List<CartEntity> cartList) {
-		this.cartList = cartList;
-	}
-
+	
 	@Override
 	public String toString() {
 		return "Food [id=" + id + ", foodName=" + foodName + ", foodType=" + foodType + ", foodSize=" + foodSize
-				+ ", quantity=" + quantity + ", price=" + price + ", cartList=" + cartList + "]";
+				+ ", quantity=" + quantity + ", price=" + price + "]";
 	}
 	
 }

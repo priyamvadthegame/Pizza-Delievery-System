@@ -8,12 +8,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "pos_tbl_creditcard")
+@Table(name = "creditcard")
 public class CreditCardEntity {
 
 	@Id
 	@Column(name = "CreditCardint")
-	private String creditCardNumber;
+	private Long creditCardNumber;
 	
 	@Column(name = "ValidFrom")
 	private String validFrom;
@@ -33,7 +33,7 @@ public class CreditCardEntity {
 		
 	}
 
-	public CreditCardEntity(String creditCardNumber, String validFrom, String validTo, double balance) {
+	public CreditCardEntity(Long creditCardNumber, String validFrom, String validTo, double balance) {
 		super();
 		this.creditCardNumber = creditCardNumber;
 		this.validFrom = validFrom;
@@ -41,11 +41,11 @@ public class CreditCardEntity {
 		this.balance = balance;
 	}
 
-	public String getCreditCardNumber() {
+	public Long getCreditCardNumber() {
 		return creditCardNumber;
 	}
 
-	public void setCreditCardNumber(String creditCardNumber) {
+	public void setCreditCardNumber(Long creditCardNumber) {
 		this.creditCardNumber = creditCardNumber;
 	}
 
