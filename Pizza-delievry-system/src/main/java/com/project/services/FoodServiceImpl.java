@@ -8,19 +8,17 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
+
 
 import com.project.entity.FoodEntity;
 import com.project.entity.UserEntity;
-=======
+
 import com.project.entity.FoodEntity;
->>>>>>> branch 'master' of https://github.com/priyamvadthegame/Pizza-Delievery-System.git
+
 import com.project.json.Food;
 import com.project.repositories.FoodRepository;
-<<<<<<< HEAD
+
 import com.project.repositories.UserRepository;
-=======
->>>>>>> branch 'master' of https://github.com/priyamvadthegame/Pizza-Delievery-System.git
 import com.project.utils.FoodUtils;
 
 @Service
@@ -70,11 +68,8 @@ public class FoodServiceImpl implements FoodService {
 
 	@Override
 	public List<Food> getAllFood() {
-<<<<<<< HEAD
+
 		List<FoodEntity> foodEntityList=foodRepository.findAll();
-		return FoodUtils.convertFoodEntityListToFoodJson(foodEntityList);
-=======
-		List<FoodEntity> foodEntityList = foodRepository.findAll();
 		return FoodUtils.convertFoodEntityListToFoodJson(foodEntityList);
 	}
 
@@ -114,7 +109,7 @@ public class FoodServiceImpl implements FoodService {
 		{
 			return null;
 		}
->>>>>>> branch 'master' of https://github.com/priyamvadthegame/Pizza-Delievery-System.git
+
 	}
 }
 
