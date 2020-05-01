@@ -10,13 +10,19 @@ import org.springframework.stereotype.Service;
 
 
 
+
+
 import com.project.entity.FoodEntity;
 import com.project.entity.UserEntity;
 
 import com.project.entity.FoodEntity;
 
+
+
 import com.project.json.Food;
 import com.project.repositories.FoodRepository;
+
+
 
 import com.project.repositories.UserRepository;
 import com.project.utils.FoodUtils;
@@ -71,6 +77,7 @@ public class FoodServiceImpl implements FoodService {
 
 		List<FoodEntity> foodEntityList=foodRepository.findAll();
 		return FoodUtils.convertFoodEntityListToFoodJson(foodEntityList);
+
 	}
 
 	@Override
@@ -111,5 +118,6 @@ public class FoodServiceImpl implements FoodService {
 		}
 
 	}
+
 }
 

@@ -2,16 +2,19 @@ package com.project.services;
 
 import java.util.List;
 
-import com.project.json.Food;
-import com.project.json.Store;
+import com.project.json.StoreJson;
 
 public interface StoreService {
-	public Store registerStore(Store store);
-	public boolean deleteStore(Long id);
-	public List<Store> filterStoreByFood(Long id);
-	public List<Food> getFoodInStore(Long id);
-	public Store save(Store store);
 	
 	
-
+	public  StoreJson save(StoreJson store) ;
+	
+	
+	public boolean deleteStore( Long id);
+	
+	
+	public List<StoreJson> filterStoreByFood( Long id);
+	
+	public List<StoreJson> getFoodInStore( Long id);
+	
 }
