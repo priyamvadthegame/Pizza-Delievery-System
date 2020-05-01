@@ -12,8 +12,27 @@ public class UserJson {
 
 	private String sessionId;
 	
+	private UserProfileJson userprofile;
+	
 	public UserJson() {
 		
+	}
+	
+	public UserJson(String password, String usertype, int loginstatus, String sessionId, UserProfileJson userprofile) {
+		super();
+		this.password = password;
+		this.usertype = usertype;
+		this.loginstatus = loginstatus;
+		this.sessionId = sessionId;
+		this.userprofile = userprofile;
+	}
+
+	public UserJson(String password, String usertype, int loginstatus, UserProfileJson userprofile) {
+		super();
+		this.password = password;
+		this.usertype = usertype;
+		this.loginstatus = loginstatus;
+		this.userprofile = userprofile;
 	}
 
 	public UserJson(long userId, String password, String usertype, int loginstatus, String sessionId) {
@@ -23,6 +42,13 @@ public class UserJson {
 		this.usertype = usertype;
 		this.loginstatus = loginstatus;
 		this.sessionId = sessionId;
+	}
+
+	public UserJson(String password, String usertype, int loginstatus) {
+		super();
+		this.password = password;
+		this.usertype = usertype;
+		this.loginstatus = loginstatus;
 	}
 
 	public UserJson(String password, String usertype, int loginstatus, String sessionId) {
@@ -73,11 +99,21 @@ public class UserJson {
 		this.sessionId = sessionId;
 	}
 
+	public UserProfileJson getUserprofile() {
+		return userprofile;
+	}
+
+	public void setUserprofile(UserProfileJson userprofile) {
+		this.userprofile = userprofile;
+	}
+
 	@Override
 	public String toString() {
 		return "UserJson [userId=" + userId + ", password=" + password + ", usertype=" + usertype + ", loginstatus="
-				+ loginstatus + ", sessionId=" + sessionId + "]";
+				+ loginstatus + ", sessionId=" + sessionId + ", userprofile=" + userprofile + "]";
 	}
+
+	
 	
 	
 

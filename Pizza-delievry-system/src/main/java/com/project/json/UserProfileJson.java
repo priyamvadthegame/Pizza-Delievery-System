@@ -28,8 +28,28 @@ private long userId;
 	
 	private String emailId;
 	
+	private UserJson user;
+	
 	public UserProfileJson() {
 		
+	}
+	
+	public UserProfileJson(String firstname, String lastname, LocalDate dob, String gender, String street,
+			String location, String city, String state, String pincode, String mobileno, String emailId,
+			UserJson user) {
+		super();
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.dob = dob;
+		this.gender = gender;
+		this.street = street;
+		this.location = location;
+		this.city = city;
+		this.state = state;
+		this.pincode = pincode;
+		this.mobileno = mobileno;
+		this.emailId = emailId;
+		this.user = user;
 	}
 
 	public UserProfileJson(long userId, String firstname, String lastname, LocalDate dob, String gender, String street,
@@ -161,12 +181,23 @@ private long userId;
 		this.emailId = emailId;
 	}
 
+	public UserJson getUser() {
+		return user;
+	}
+
+	public void setUser(UserJson user) {
+		this.user = user;
+	}
+
 	@Override
 	public String toString() {
 		return "UserProfileJson [userId=" + userId + ", firstname=" + firstname + ", lastname=" + lastname + ", dob="
 				+ dob + ", gender=" + gender + ", street=" + street + ", location=" + location + ", city=" + city
-				+ ", state=" + state + ", pincode=" + pincode + ", mobileno=" + mobileno + ", emailId=" + emailId + "]";
+				+ ", state=" + state + ", pincode=" + pincode + ", mobileno=" + mobileno + ", emailId=" + emailId
+				+ ", user=" + user + "]";
 	}
+
+	
 	
 	
 }

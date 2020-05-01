@@ -55,6 +55,13 @@ public class UserEntity {
 	public UserEntity() {
 		
 	}
+	
+	public UserEntity(String password, String usertype, int loginstatus) {
+		super();
+		this.password = password;
+		this.usertype = usertype;
+		this.loginstatus = loginstatus;
+	}
 
 	public UserEntity(String password, String usertype, int loginstatus, String sessionId) {
 		super();
