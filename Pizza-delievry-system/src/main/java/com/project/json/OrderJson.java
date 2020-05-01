@@ -7,18 +7,18 @@ public class OrderJson {
 
     private long orderId;
 	
-	private long storeId;
+	
 	
 	
 	private String orderStatus;
 	
-	private long Street;
+	private String Street;
 
 	
-	private long city;
+	private String city;
 	
 	
-	private long state;
+	private String state;
 	
 	
 	private long pincode;
@@ -33,9 +33,9 @@ public class OrderJson {
 	}
 
 
-	public OrderJson(long storeId, String orderStatus, long street, long city, long state, long pincode, int mobileNo) {
+	public OrderJson( String orderStatus, String street, String city, String state, long pincode, int mobileNo) {
 		super();
-		this.storeId = storeId;
+		
 		this.orderStatus = orderStatus;
 		Street = street;
 		this.city = city;
@@ -45,11 +45,10 @@ public class OrderJson {
 	}
 
 
-	public OrderJson(long orderId, long storeId, String orderStatus, long street, long city, long state, long pincode,
+	public OrderJson(long orderId,  String orderStatus, String street, String city, String state, long pincode,
 			int mobileNo) {
 		super();
 		this.orderId = orderId;
-		this.storeId = storeId;
 		this.orderStatus = orderStatus;
 		Street = street;
 		this.city = city;
@@ -68,17 +67,6 @@ public class OrderJson {
 		this.orderId = orderId;
 	}
 
-
-	public long getStoreId() {
-		return storeId;
-	}
-
-
-	public void setStoreId(long storeId) {
-		this.storeId = storeId;
-	}
-
-
 	public String getOrderStatus() {
 		return orderStatus;
 	}
@@ -89,32 +77,32 @@ public class OrderJson {
 	}
 
 
-	public long getStreet() {
+	public String getStreet() {
 		return Street;
 	}
 
 
-	public void setStreet(long street) {
+	public void setStreet(String street) {
 		Street = street;
 	}
 
 
-	public long getCity() {
+	public String getCity() {
 		return city;
 	}
 
 
-	public void setCity(long city) {
+	public void setCity(String city) {
 		this.city = city;
 	}
 
 
-	public long getState() {
+	public String getState() {
 		return state;
 	}
 
 
-	public void setState(long state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 
@@ -157,7 +145,7 @@ public class OrderJson {
 
 	@Override
 	public String toString() {
-		return "OrderJson [orderId=" + orderId + ", storeId=" + storeId + ", orderStatus=" + orderStatus + ", Street="
+		return "OrderJson [orderId=" + orderId + ", orderStatus=" + orderStatus + ", Street="
 				+ Street + ", city=" + city + ", state=" + state + ", pincode=" + pincode + ", mobileNo=" + mobileNo
 				+ "]";
 	}
