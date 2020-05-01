@@ -9,9 +9,12 @@ import com.project.json.Food;
 public interface FoodService {
 
 	
-	boolean delete(String id);
-	Food save(Food food);
-	Food update(Food food, String id);
-	List<Food> getAllFood();
+	public boolean delete(String id);
+	public Food save(Food food);
+	public Food update(Food food, String id);
+	public List<Food> getAllFood();
+	public List<Food> sortFoodByPrice();
+	public List<Food> filterFoodBySearchText(String searchtext);
+	public List<Food> filterFoodByType(String type);
 
 }
