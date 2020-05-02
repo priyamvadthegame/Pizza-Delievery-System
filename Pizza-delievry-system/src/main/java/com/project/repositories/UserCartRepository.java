@@ -10,9 +10,9 @@ import com.project.entity.CartEntity;
 
 @Component
 public interface UserCartRepository extends JpaRepository<CartEntity, Long> {
-	List<UserCartRepository> findByCartId(long cartId);
-	List<UserCartRepository> findByOrderByfoodId(int foodId);
-	List<UserCartRepository> findBySessionId(String apiKey);
+	List<CartEntity> findByCartId(long cartId);
+	List<CartEntity> findByOrderByfoodId(int foodId);
+	List<CartEntity> findBySessionId(String apiKey);
 
 
 }
