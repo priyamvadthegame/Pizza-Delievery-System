@@ -1,6 +1,7 @@
 package com.project.services;
 
 import java.util.List;
+
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+
 	
 	@Autowired
 	private UserProfileRepository userprofileRepository;
@@ -80,6 +82,48 @@ public class UserServiceImpl implements UserService {
 			return "{\"result\": \"Logout Successful\"}";
 		}
 		
+	}
+	
+	@Override
+	public UserProfileJson update(UserProfileJson user, long id) {
+		UserProfileEntity userProfileEntity = userprofileRepository.findByUserId(id).get(0);
+		if(userProfileEntity != null) {
+			userProfileEntity.setUserId(user.getUserId());
+			userProfileEntity.setFirstname(user.getFirstname());
+			userProfileEntity.setLastname(user.getLastname());
+			userProfileEntity.setDob(user.getDob());
+			userProfileEntity.setGender(user.getGender());
+			userProfileEntity.setStreet(user.getStreet());
+			userProfileEntity.setLocation(user.getLocation());
+			userProfileEntity.setCity(user.getCity());
+			userProfileEntity.setState(user.getState());
+			userProfileEntity.setPincode(user.getPincode());
+			userProfileEntity.setMobileno(user.getMobileno());
+			userProfileEntity.setEmailId(user.getEmailId());
+
+			//userProfileEntity.setPassword(user.getPassword());
+			userProfileEntity = userprofileRepository.save(userProfileEntity);
+			return UserUtils.convertUserProfileEntityToUserProfileJson(userProfileEntity);
+		}
+		return null;
+	}
+	
+	@Override
+	public UserJson changepassword(UserJson user, String id) {
+		String password = user.getPassword();
+		UserEntity userEntity = userRepository.findById(Long.valueOf(id)).get();
+		if(userEntity != null) {
+					if(password.equals(user.getPassword())) {
+				
+				userEntity.setPassword(user.getPassword());
+				userEntity = userRepository.save(userEntity);
+				return UserUtils.convertUserEntityToUserJson(userEntity);	
+				}
+				else {
+					return null;
+				}
+		}
+		return null;
 	}
 
 }

@@ -28,6 +28,7 @@ private long userId;
 	
 	private String emailId;
 	
+
 	private UserJson user;
 	
 	public UserProfileJson() {

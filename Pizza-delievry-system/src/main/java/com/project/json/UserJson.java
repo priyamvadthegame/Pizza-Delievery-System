@@ -3,6 +3,7 @@ package com.project.json;
 public class UserJson {
 	
 	private long userId;
+
 	
 	private String username;
 

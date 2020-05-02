@@ -18,7 +18,6 @@ public class FoodUtils {
 	}
 	
 	
-	
 	public static Food convertFoodEntityToFoodJson(FoodEntity foodEntity)
 	{
 		return new Food(foodEntity.getId(),foodEntity.getFoodName(),foodEntity.getFoodType(),foodEntity.getFoodSize(),

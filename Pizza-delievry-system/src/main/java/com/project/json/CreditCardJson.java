@@ -4,6 +4,7 @@ package com.project.json;
 
 public class CreditCardJson {
 	
+
 	private Long creditCardNumber;
 	
 	

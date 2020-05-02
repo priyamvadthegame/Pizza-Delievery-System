@@ -51,7 +51,7 @@ public class UserProfileEntity {
 	@Column(name = "EMAIL_ID")
 	private String emailId;
 	
-	@OneToOne(mappedBy = "userprofile")
+	@OneToOne(mappedBy="userprofile")
 	private UserEntity user;
 	
 	public UserProfileEntity() {
@@ -72,24 +72,6 @@ public class UserProfileEntity {
 		this.pincode = pincode;
 		this.mobileno = mobileno;
 		this.emailId = emailId;
-	}
-
-	public UserProfileEntity(String firstname, String lastname, LocalDate dob, String gender, String street,
-			String location, String city, String state, String pincode, String mobileno, String emailId,
-			UserEntity user) {
-		super();
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.dob = dob;
-		this.gender = gender;
-		this.street = street;
-		this.location = location;
-		this.city = city;
-		this.state = state;
-		this.pincode = pincode;
-		this.mobileno = mobileno;
-		this.emailId = emailId;
-		this.user = user;
 	}
 
 	public long getUserId() {
@@ -203,6 +185,31 @@ public class UserProfileEntity {
 				+ ", state=" + state + ", pincode=" + pincode + ", mobileno=" + mobileno + ", emailId=" + emailId
 				+ ", user=" + user + "]";
 	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 	
 	
 }
