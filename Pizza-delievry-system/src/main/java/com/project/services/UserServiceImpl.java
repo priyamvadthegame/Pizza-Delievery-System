@@ -27,9 +27,12 @@ public class UserServiceImpl implements UserService {
 	
 	public UserProfileJson save(UserProfileJson user, String username, String password, String usertype)
 	{
-		UserEntity newUser = new UserEntity(username, password, usertype);
-		UserProfileEntity userprofileEntity = userprofileRepository.findByUserId(newUser.getUserId()).get(0);
-		userprofileEntity = userprofileRepository.save(UserUtils.convertUserProfileJsonToUserProfileEntity(user));
+		UserEntity newUser = new UserEntity();
+		newUser.setUsername(username);
+		newUser.setPassword(password);
+		newUser.setUsertype(usertype);
+		UserProfileEntity userprofileEntity = userprofileRepository.save(UserUtils.convertUserProfileJsonToUserProfileEntity(user));
+		userprofileEntity.setUser(newUser);
 		return UserUtils.convertUserProfileEntityToUserProfileJson(userprofileEntity);
 	}
 	
