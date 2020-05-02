@@ -19,27 +19,6 @@ public class UserJson {
 		
 	}
 
-	public UserJson(long userId, String username, String password, String usertype, String loginstatus,
-			UserProfileJson userprofile) {
-		super();
-		this.userId = userId;
-		this.username = username;
-		this.password = password;
-		this.usertype = usertype;
-		this.loginstatus = loginstatus;
-		this.userprofile = userprofile;
-	}
-
-	public UserJson(String username, String password, String usertype, String loginstatus,
-			UserProfileJson userprofile) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.usertype = usertype;
-		this.loginstatus = loginstatus;
-		this.userprofile = userprofile;
-	}
-
 	public UserJson(String username, String password, String usertype, String loginstatus) {
 		super();
 		this.username = username;

@@ -1,5 +1,6 @@
 package com.project.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import java.util.Random;
@@ -25,10 +26,27 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserProfileRepository userprofileRepository;
 	
-	public UserProfileJson save(UserProfileJson user)
+	public UserProfileJson save(UserProfileJson user, String username, String password, String usertype)
 	{
-		UserProfileEntity userprofileEntity = userprofileRepository.save(UserUtils.convertUserProfileJsonToUserProfileEntity(user));
-		return UserUtils.convertUserProfileEntityToUserProfileJson(userprofileEntity);
+		if(userRepository.findByUsername(username).size()==0)
+		{
+			UserEntity newUser = new UserEntity();
+			newUser.setUsername(username);
+			newUser.setPassword(password);
+			newUser.setUsertype(usertype);
+			userRepository.save(newUser);
+			UserProfileEntity userProfileEntity = UserUtils.convertUserProfileJsonToUserProfileEntity(user);
+			userProfileEntity.setUser(newUser);
+			UserProfileEntity userprofileEntity = userprofileRepository.save(userProfileEntity);
+			newUser.setUserprofile(userprofileEntity);
+			userRepository.save(newUser);
+			return UserUtils.convertUserProfileEntityToUserProfileJson(userprofileEntity);
+		}
+		else
+		{
+			return new UserProfileJson("Username already exists..Please enter another Username", null , null , null , null , null, 
+					null, null, null, null, null);
+		}
 	}
 	
 	public String login(UserJson user)
@@ -62,9 +80,16 @@ public class UserServiceImpl implements UserService {
 	
 	public UserProfileJson userInfo(String authToken)
 	{
-		UserEntity userEntity = userRepository.findByLoginStatus(authToken).get(0);
-		UserProfileEntity userprofileEntity = userprofileRepository.findByUserId(userEntity.getUserId()).get(0);
-		return UserUtils.convertUserProfileEntityToUserProfileJson(userprofileEntity);
+		List<UserEntity> userList = userRepository.findByLoginStatus(authToken);
+		if (authToken.equals(null) || userList == null || userList.size() == 0)
+		{
+			return null;
+		}
+		else
+		{
+			UserEntity userEntity = userRepository.findByLoginStatus(authToken).get(0);
+			return UserUtils.convertUserProfileEntityToUserProfileJson(userEntity.getUserprofile());
+		}
 	}
 	
 	public String logout(String authToken)
@@ -85,10 +110,12 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public UserProfileJson update(UserProfileJson user, long id) {
-		UserProfileEntity userProfileEntity = userprofileRepository.findByUserId(id).get(0);
-		if(userProfileEntity != null) {
-			userProfileEntity.setUserId(user.getUserId());
+	public UserProfileJson update(UserProfileJson user, String id) {
+		
+		UserEntity userEntity=userRepository.findByLoginStatus(id).get(0);
+		UserProfileEntity userProfileEntity =userEntity.getUserprofile();
+		if(userEntity != null) {
+			userProfileEntity.setUserId(userProfileEntity.getUserId());
 			userProfileEntity.setFirstname(user.getFirstname());
 			userProfileEntity.setLastname(user.getLastname());
 			userProfileEntity.setDob(user.getDob());
@@ -100,8 +127,6 @@ public class UserServiceImpl implements UserService {
 			userProfileEntity.setPincode(user.getPincode());
 			userProfileEntity.setMobileno(user.getMobileno());
 			userProfileEntity.setEmailId(user.getEmailId());
-
-			//userProfileEntity.setPassword(user.getPassword());
 			userProfileEntity = userprofileRepository.save(userProfileEntity);
 			return UserUtils.convertUserProfileEntityToUserProfileJson(userProfileEntity);
 		}
@@ -109,13 +134,12 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public UserJson changepassword(UserJson user, String id) {
-		String password = user.getPassword();
-		UserEntity userEntity = userRepository.findById(Long.valueOf(id)).get();
+	public UserJson changepassword(String password,String newpassword, String id) {
+		UserEntity userEntity = userRepository.findByLoginStatus(id).get(0);
 		if(userEntity != null) {
-					if(password.equals(user.getPassword())) {
+					if(password.equals(userEntity.getPassword())) {
 				
-				userEntity.setPassword(user.getPassword());
+				userEntity.setPassword(newpassword);
 				userEntity = userRepository.save(userEntity);
 				return UserUtils.convertUserEntityToUserJson(userEntity);	
 				}
