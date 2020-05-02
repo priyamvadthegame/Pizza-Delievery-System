@@ -52,7 +52,6 @@ public class StoreEntity {
 
 	public StoreEntity() {
 		super();
-		
 	}
 
 	public StoreEntity(String storeName, String storeStreet, int storeMobileNo, String storeCity, long storeState,

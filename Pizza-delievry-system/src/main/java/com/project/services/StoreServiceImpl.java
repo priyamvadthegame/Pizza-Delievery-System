@@ -28,14 +28,14 @@ public class StoreServiceImpl implements StoreService{
 
 	
 	@Autowired
-	private static UserRepository userRepository;
+	private  UserRepository userRepository;
 	@Autowired
-	private static UserProfileRepository userProfieRepository;
+	private  UserProfileRepository userProfieRepository;
 	
 	@Autowired
-	private static FoodRepository foodRepository;
+	private  FoodRepository foodRepository;
 	@Autowired
-	private static StoreRepository storeRepository;
+	private  StoreRepository storeRepository;
 	
 	@Override
 	public StoreJson registerStore(StoreJson store)
@@ -99,11 +99,12 @@ List<StoreEntity> userEntity=storeRepository.findByStoreId(id);
 			{	FoodEntity foodEntityToBeReturned=null;
 				try
 				{
-					StoreEntity storeEntity=storeRepository.findById(foodId).get();
+					StoreEntity storeEntity=storeRepository.findById(storeId).get();
 					FoodEntity foodEntity=foodRepository.findById(foodId).get();
 					storeEntity.getFoodList().add(foodEntity);
 					foodEntity.getStoreList().add(storeEntity);
 					storeRepository.save(storeEntity);
+					
 					foodEntityToBeReturned=foodEntity;
 				}
 				catch (NoSuchElementException e) {
@@ -165,7 +166,7 @@ List<StoreEntity> userEntity=storeRepository.findByStoreId(id);
 	}
 	
 	
-	public static  UserEntity getUserEntityBySessionId(String sessionId)
+	public  UserEntity getUserEntityBySessionId(String sessionId)
 	{
 		List<UserEntity> userEntity=userRepository.findByLoginStatus(sessionId);
 		
@@ -179,7 +180,7 @@ List<StoreEntity> userEntity=storeRepository.findByStoreId(id);
 		}
 	}
 	
-	public static UserProfileEntity getUserProfileEntityById(Long userId)
+	public  UserProfileEntity getUserProfileEntityById(Long userId)
 	{
 		List<UserProfileEntity> userProfileEntityList=userProfieRepository.findByUserId(userId);
 		if(userProfileEntityList!=null&&userProfileEntityList.size()>0)
