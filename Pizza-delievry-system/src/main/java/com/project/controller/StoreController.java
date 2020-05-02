@@ -4,6 +4,7 @@ package com.project.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,15 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.json.Food;
 import com.project.json.StoreJson;
-
-
 import com.project.services.StoreService;
 
+@Configurable
 @RestController
 @RequestMapping("/myapp")
 @CrossOrigin(origins="*")
@@ -31,10 +30,15 @@ public class StoreController {
 	@Autowired
 	private StoreService storeService;
 	
-	@PostMapping(value="/store", produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/store")
+	public List<StoreJson> getAllFood(){
+		return storeService.getStoreList();
+	}
+	
+	@PostMapping(value="/store1", produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
 
 	public  StoreJson registerStore(@RequestBody StoreJson store) {
-		return storeService.save(store);
+		return storeService.registerStore(store);
 	}
 		
 	@DeleteMapping(value="/store/{id}")
@@ -47,7 +51,7 @@ public class StoreController {
 		return storeService.filterStoreByFood(id);
 	}
 	
-	@PostMapping(value="/store/food", produces=MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value="/store1/food", produces=MediaType.APPLICATION_JSON_VALUE)
 	public Food addFoodToStore(@RequestHeader(name = "foodId")long foodId,@RequestHeader(name = "storeId")long storeId,@RequestHeader(name = "authToken")String authToken){
 		return storeService.addFoodtoStore(foodId, storeId, authToken);
 	}
