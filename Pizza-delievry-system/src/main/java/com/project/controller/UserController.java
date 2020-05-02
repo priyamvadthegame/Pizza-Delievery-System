@@ -23,8 +23,9 @@ public class UserController {
 	private UserService userService;
 	
 	@PostMapping(value="/user", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody UserProfileJson registerUser(@RequestBody UserProfileJson user) {
-		return userService.save(user);
+	public @ResponseBody UserProfileJson registerUser(@RequestBody UserProfileJson user, @RequestHeader(name="username") String username, 
+			@RequestHeader(name="password") String password, @RequestHeader(name="usertype") String usertype) {
+		return userService.save(user, username, password, usertype);
 	}
 	
 	@PostMapping(value="/user/login", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)

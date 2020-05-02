@@ -25,9 +25,11 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserProfileRepository userprofileRepository;
 	
-	public UserProfileJson save(UserProfileJson user)
+	public UserProfileJson save(UserProfileJson user, String username, String password, String usertype)
 	{
-		UserProfileEntity userprofileEntity = userprofileRepository.save(UserUtils.convertUserProfileJsonToUserProfileEntity(user));
+		UserEntity newUser = new UserEntity(username, password, usertype);
+		UserProfileEntity userprofileEntity = userprofileRepository.findByUserId(newUser.getUserId()).get(0);
+		userprofileEntity = userprofileRepository.save(UserUtils.convertUserProfileJsonToUserProfileEntity(user));
 		return UserUtils.convertUserProfileEntityToUserProfileJson(userprofileEntity);
 	}
 	
@@ -62,9 +64,17 @@ public class UserServiceImpl implements UserService {
 	
 	public UserProfileJson userInfo(String authToken)
 	{
-		UserEntity userEntity = userRepository.findByLoginStatus(authToken).get(0);
-		UserProfileEntity userprofileEntity = userprofileRepository.findByUserId(userEntity.getUserId()).get(0);
-		return UserUtils.convertUserProfileEntityToUserProfileJson(userprofileEntity);
+		List<UserEntity> userList = userRepository.findByLoginStatus(authToken);
+		if (authToken.equals(null) || userList == null || userList.size() == 0)
+		{
+			return null;
+		}
+		else
+		{
+			UserEntity userEntity = userRepository.findByLoginStatus(authToken).get(0);
+			UserProfileEntity userprofileEntity = userprofileRepository.findByUserId(userEntity.getUserId()).get(0);
+			return UserUtils.convertUserProfileEntityToUserProfileJson(userprofileEntity);
+		}
 	}
 	
 	public String logout(String authToken)

@@ -6,7 +6,7 @@ import com.project.json.UserProfileJson;
 
 public interface UserService {
 	
-	public UserProfileJson save(UserProfileJson user);
+	public UserProfileJson save(UserProfileJson user, String username, String password, String usertype);
 	
 	public String login(UserJson user);
 	
