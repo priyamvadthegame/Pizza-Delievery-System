@@ -1,5 +1,6 @@
 package com.project.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import java.util.Random;
@@ -27,13 +28,25 @@ public class UserServiceImpl implements UserService {
 	
 	public UserProfileJson save(UserProfileJson user, String username, String password, String usertype)
 	{
-		UserEntity newUser = new UserEntity();
-		newUser.setUsername(username);
-		newUser.setPassword(password);
-		newUser.setUsertype(usertype);
-		UserProfileEntity userprofileEntity = userprofileRepository.save(UserUtils.convertUserProfileJsonToUserProfileEntity(user));
-		userprofileEntity.setUser(newUser);
-		return UserUtils.convertUserProfileEntityToUserProfileJson(userprofileEntity);
+		if(userRepository.findByUsername(username).size()==0)
+		{
+			UserEntity newUser = new UserEntity();
+			newUser.setUsername(username);
+			newUser.setPassword(password);
+			newUser.setUsertype(usertype);
+			userRepository.save(newUser);
+			UserProfileEntity userProfileEntity = UserUtils.convertUserProfileJsonToUserProfileEntity(user);
+			userProfileEntity.setUser(newUser);
+			UserProfileEntity userprofileEntity = userprofileRepository.save(userProfileEntity);
+			newUser.setUserprofile(userprofileEntity);
+			userRepository.save(newUser);
+			return UserUtils.convertUserProfileEntityToUserProfileJson(userprofileEntity);
+		}
+		else
+		{
+			return new UserProfileJson("Username already exists..Please enter another Username", null , null , null , null , null, 
+					null, null, null, null, null);
+		}
 	}
 	
 	public String login(UserJson user)
@@ -75,8 +88,7 @@ public class UserServiceImpl implements UserService {
 		else
 		{
 			UserEntity userEntity = userRepository.findByLoginStatus(authToken).get(0);
-			UserProfileEntity userprofileEntity = userprofileRepository.findByUserId(userEntity.getUserId()).get(0);
-			return UserUtils.convertUserProfileEntityToUserProfileJson(userprofileEntity);
+			return UserUtils.convertUserProfileEntityToUserProfileJson(userEntity.getUserprofile());
 		}
 	}
 	
