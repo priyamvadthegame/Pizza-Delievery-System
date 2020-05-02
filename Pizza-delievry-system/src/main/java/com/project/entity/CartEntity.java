@@ -6,35 +6,42 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "")
+@Table(name = "cart_entity")
 public class CartEntity {
 	
 
 	@GeneratedValue
 	@Id
-	@Column(name = "")
+	@Column(name = "cart_id")
 	private long cartId;
 	
-	@Column(name = "")
+	@Column(name = "cart_quantity")
 	private int quantity;
 
-	@Column(name = "")
+	@Column(name = "food_type")
 	private String type;
 	
-	@Column(name="")
+	@Column(name="cart_price")
 	private int price;
 	
-	@Column(name = "")
+	@Column(name = "food_id")
 	private int foodId;
 	
-	@Column(name = "")
+	
 	@ManyToOne
+	@JoinColumn(name = "user_id")
 	private UserEntity user;
+	
+	@OneToOne(targetEntity =OrderEntity.class)
+	private OrderEntity order;
 	
 	@Column(name="")
 	private LocalDate date;
@@ -110,6 +117,14 @@ public class CartEntity {
 	}
 
 	
+
+	public OrderEntity getOrder() {
+		return order;
+	}
+
+	public void setOrder(OrderEntity order) {
+		this.order = order;
+	}
 
 	@Override
 	public boolean equals(Object obj) {

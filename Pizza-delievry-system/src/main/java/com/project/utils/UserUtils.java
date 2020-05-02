@@ -1,8 +1,5 @@
 package com.project.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
 
 import com.project.entity.UserEntity;
 import com.project.entity.UserProfileEntity;
@@ -11,31 +8,32 @@ import com.project.json.UserProfileJson;
 
 public class UserUtils {
 	
-	public static List<UserJson> convertUserEntityListToUserList(List<UserEntity> userEntityList) {
-		List<UserJson> userList = new ArrayList<UserJson>();
-		Consumer<UserEntity> consumer = (UserEntity userEntity)->userList.add(convertUserEntityToUser(userEntity));
-		userEntityList.stream().forEach(consumer);
-		return userList;
+	public static UserProfileEntity convertUserProfileJsonToUserProfileEntity(UserProfileJson userprofileJson)
+	{
+		return new UserProfileEntity(userprofileJson.getFirstname(), userprofileJson.getLastname(), userprofileJson.getDob(), userprofileJson.getGender(),
+			userprofileJson.getStreet(), userprofileJson.getLocation(), userprofileJson.getCity(), userprofileJson.getState(), userprofileJson.getPincode(),
+			userprofileJson.getMobileno(), userprofileJson.getEmailId());
 	}
 	
-	public static UserProfileJson convertUserEntityToUserProfileJson(UserProfileEntity userEntity) {
-		return new UserProfileJson(userEntity.getUserId(),userEntity.getFirstname(), userEntity.getLastname(),userEntity.getDob(),userEntity.getGender(), userEntity.getStreet(),
-				userEntity.getLocation(), userEntity.getCity(), userEntity.getState(), userEntity.getPincode(), userEntity.getMobileno(), userEntity.getEmailId());
+	public static UserProfileJson convertUserProfileEntityToUserProfileJson(UserProfileEntity userprofileEntity)
+	{
+		return new UserProfileJson(userprofileEntity.getFirstname(), userprofileEntity.getLastname(), userprofileEntity.getDob(), userprofileEntity.getGender(),
+			userprofileEntity.getStreet(), userprofileEntity.getLocation(), userprofileEntity.getCity(), userprofileEntity.getState(), userprofileEntity.getPincode(),
+			userprofileEntity.getMobileno(), userprofileEntity.getEmailId());
 	}
-
-	public static UserProfileEntity convertUserToUserProfileEntity(UserProfileJson user) {
-		return new UserProfileEntity(user.getFirstname(), user.getLastname(),user.getDob(),user.getGender(), user.getStreet(),
-				user.getLocation(), user.getCity(), user.getState(), user.getPincode(), user.getMobileno(), user.getEmailId());
+	
+	public static UserEntity convertUserJsonToUserEntity(UserJson userJson)
+	{
+		return new UserEntity(userJson.getUsername(), userJson.getPassword(), userJson.getUsertype(), userJson.getLoginstatus());
+		
 	}
-	public static UserJson convertUserEntityToUser(UserEntity userEntity) {
-		return new UserJson(userEntity.getUserId(), userEntity.getPassword(),userEntity.getUsertype(),userEntity.getLoginstatus(),
-				userEntity.getSessionId());
-		}
-
-	public static UserEntity convertUserToUserEntity(UserJson user) {
-		return new UserEntity(user.getPassword(),user.getUsertype(),user.getLoginstatus(),
-				user.getSessionId());
-		}
-
+	
+	public static UserJson convertUserEntityToUserJson(UserEntity userEntity)
+	{
+		return new UserJson(userEntity.getUsername(), userEntity.getPassword(), userEntity.getUsertype(), userEntity.getLoginStatus());
+		
+	}
+	
+	
 
 }

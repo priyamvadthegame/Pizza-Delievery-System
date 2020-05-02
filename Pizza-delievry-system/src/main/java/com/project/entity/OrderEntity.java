@@ -4,46 +4,50 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "")
+@Table(name = "order_entity")
 public class OrderEntity {
 	
 	@GeneratedValue
 	@Id
-	@Column(name = "")
+	@Column(name = "id")
 	private long orderId;
 	
-	@Column(name = "")
-	private long storeId;
+	@ManyToOne
+	@JoinColumn(name = "storeId")
+	private StoreEntity storeId;
 	
-	@Column(name = "")
+	@Column(name = "status")
 	private String orderStatus;
 	
-	@Column(name = "")
-	private long Street;
+	@Column(name = "street")
+	private String Street;
 
-	@Column(name = "")
-	private long city;
+	@Column(name = "city")
+	private String city;
 	
-	@Column(name = "")
-	private long state;
+	@Column(name = "state")
+	private String state;
 	
-	@Column(name = "")
+	@Column(name = "pincode")
 	private long pincode;
 	
-	@Column(name = "")
+	@Column(name = "mobile")
 	private int mobileNo;
 	
-	@Column(name = "")
+	
 	@ManyToOne
+	@JoinColumn(name = "orderId")
 	private UserEntity userId;
 	
-	@Column(name = "")
-	@OneToOne
+	
+	@OneToOne(targetEntity = CartEntity.class)
 	private CartEntity cartId;
 
 	public OrderEntity() {
@@ -51,10 +55,9 @@ public class OrderEntity {
 		
 	}
 
-	public OrderEntity(long storeId, String orderStatus, long street, long city, long state, long pincode,
+	public OrderEntity( String orderStatus, String street, String city, String state, long pincode,
 			int mobileNo) {
 		super();
-		this.storeId = storeId;
 		this.orderStatus = orderStatus;
 		Street = street;
 		this.city = city;
@@ -71,11 +74,11 @@ public class OrderEntity {
 		this.orderId = orderId;
 	}
 
-	public long getStoreId() {
+	public StoreEntity getStoreId() {
 		return storeId;
 	}
 
-	public void setStoreId(long storeId) {
+	public void setStoreId(StoreEntity storeId) {
 		this.storeId = storeId;
 	}
 
@@ -87,27 +90,27 @@ public class OrderEntity {
 		this.orderStatus = orderStatus;
 	}
 
-	public long getStreet() {
+	public String getStreet() {
 		return Street;
 	}
 
-	public void setStreet(long street) {
+	public void setStreet(String street) {
 		Street = street;
 	}
 
-	public long getCity() {
+	public String getCity() {
 		return city;
 	}
 
-	public void setCity(long city) {
+	public void setCity(String city) {
 		this.city = city;
 	}
 
-	public long getState() {
+	public String getState() {
 		return state;
 	}
 
-	public void setState(long state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 

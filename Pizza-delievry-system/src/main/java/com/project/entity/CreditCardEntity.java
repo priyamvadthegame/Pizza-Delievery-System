@@ -3,35 +3,38 @@ package com.project.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "")
+@Table(name = "creditcard")
 public class CreditCardEntity {
 
 	@Id
-	@Column(name = "")
-	private String creditCardNumber;
+	@Column(name = "CreditCardint")
+	private Long creditCardNumber;
 	
-	@Column(name = "")
+	@Column(name = "ValidFrom")
 	private String validFrom;
 	
-	@Column(name = "")
+	@Column(name = "ValidTo")
 	private String validTo;
 	
-	@Column(name = "")
+	@Column(name = "Balance")
 	private double balance;
 	
 	@ManyToOne
+	@JoinColumn(name="userId")
 	private UserEntity userId;
 
 	public CreditCardEntity() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
-	public CreditCardEntity(String creditCardNumber, String validFrom, String validTo, double balance) {
+	public CreditCardEntity(Long creditCardNumber, String validFrom, String validTo, double balance) {
 		super();
 		this.creditCardNumber = creditCardNumber;
 		this.validFrom = validFrom;
@@ -39,11 +42,11 @@ public class CreditCardEntity {
 		this.balance = balance;
 	}
 
-	public String getCreditCardNumber() {
+	public Long getCreditCardNumber() {
 		return creditCardNumber;
 	}
 
-	public void setCreditCardNumber(String creditCardNumber) {
+	public void setCreditCardNumber(Long creditCardNumber) {
 		this.creditCardNumber = creditCardNumber;
 	}
 

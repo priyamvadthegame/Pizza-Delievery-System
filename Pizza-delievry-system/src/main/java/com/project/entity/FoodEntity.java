@@ -1,6 +1,8 @@
+
 package com.project.entity;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -37,13 +40,49 @@ public class FoodEntity {
 	@Column(name = "FOOD_PRICE")
 	private double price;
 	
-	
-	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name="cart_id")
-	private List<CartEntity> cartList;
+	@ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                CascadeType.PERSIST,
+                CascadeType.MERGE
+            },
+            mappedBy = "foodList")
+	private Set<StoreEntity> storeList;
 
 	
+
+
+
+
+	public Set<StoreEntity> getStoreList() {
+		return storeList;
+	}
+
+
+
+
+	public void setStoreList(Set<StoreEntity> storeList) {
+		this.storeList = storeList;
+	}
+
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FoodEntity other = (FoodEntity) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+
+
 
 	public FoodEntity() {
 		super();
@@ -52,8 +91,8 @@ public class FoodEntity {
 
 
 
-	public FoodEntity(long id, String foodtName, String foodType, String foodSize, int quantity, double price,
-			List<CartEntity> cartList) {
+	public FoodEntity(long id, String foodtName, String foodType, String foodSize, int quantity, double price
+	) {
 		super();
 		this.id = id;
 		this.foodName = foodtName;
@@ -61,7 +100,7 @@ public class FoodEntity {
 		this.foodSize = foodSize;
 		this.quantity = quantity;
 		this.price = price;
-		this.cartList = cartList;
+
 	}
 
 
@@ -150,24 +189,13 @@ public class FoodEntity {
 
 
 
-	public List<CartEntity> getCartList() {
-		return cartList;
-	}
-
-
-
-
-	public void setCartList(List<CartEntity> cartList) {
-		this.cartList = cartList;
-	}
-
 
 
 
 	@Override
 	public String toString() {
 		return "FoodEntity [id=" + id + ", foodName=" + foodName + ", foodType=" + foodType + ", foodSize=" + foodSize
-				+ ", quantity=" + quantity + ", price=" + price + ", cartList=" + cartList + "]";
+				+ ", quantity=" + quantity + ", price=" + price + "]";
 	}
 	
 }

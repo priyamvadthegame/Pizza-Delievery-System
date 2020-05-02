@@ -2,6 +2,8 @@ package com.project.services;
 
 import java.util.List;
 
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,7 @@ import com.project.entity.UserEntity;
 import com.project.entity.UserProfileEntity;
 import com.project.json.UserJson;
 import com.project.json.UserProfileJson;
+import com.project.repositories.UserProfileRepository;
 import com.project.repositories.UserRepository;
 import com.project.utils.UserUtils;
 
@@ -16,23 +19,74 @@ import com.project.utils.UserUtils;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private UserRepository userRepository;	
+	private UserRepository userRepository;
 
-
-	public UserJson save(UserJson user) {
-		UserEntity userEntity = 
-				userRepository.save(UserUtils.convertUserToUserEntity(user));
-		return UserUtils.convertUserEntityToUser(userEntity);
+	
+	@Autowired
+	private UserProfileRepository userprofileRepository;
+	
+	public UserProfileJson save(UserProfileJson user)
+	{
+		UserProfileEntity userprofileEntity = userprofileRepository.save(UserUtils.convertUserProfileJsonToUserProfileEntity(user));
+		return UserUtils.convertUserProfileEntityToUserProfileJson(userprofileEntity);
 	}
 	
-	public UserProfileJson save(UserProfileJson user) {
-		UserProfileEntity userProfileEntity = 
-				userRepository.save(UserUtils.convertUserToUserProfileEntity(user));
-		return UserUtils.convertUserEntityToUserProfileJson(userProfileEntity);
+	public String login(UserJson user)
+	{
+		String loginStatus = null;
+		Random random = new Random();
+		String username = user.getUsername();
+		String password = user.getPassword();
+		List<UserEntity> userList = userRepository.findByUsername(username);
+		if(userList == null || userList.size() == 0)
+		{
+			return "{ \"result\": \"failed\", \"message\": \"Invalid user\" " + username + "}";
+		}
+		else
+		{
+			UserEntity userEntity = userList.get(0);
+			if(password.equals(userEntity.getPassword()))
+			{
+				loginStatus = Integer.toString(random.nextInt(500000));
+				userEntity.setLoginStatus(loginStatus);
+				userRepository.save(userEntity);
+				return "{ \"result\": \"success\", \"message\": \"Login successful\", \"auth-token\":\"" + loginStatus + "\"}";	
+			}
+			else
+			{
+				return "{ \"result\": \"failed\", \"message\": \"Invalid password\" }";
+			}
+		}
+		
 	}
+	
+	public UserProfileJson userInfo(String authToken)
+	{
+		UserEntity userEntity = userRepository.findByLoginStatus(authToken).get(0);
+		UserProfileEntity userprofileEntity = userprofileRepository.findByUserId(userEntity.getUserId()).get(0);
+		return UserUtils.convertUserProfileEntityToUserProfileJson(userprofileEntity);
+	}
+	
+	public String logout(String authToken)
+	{
+		List<UserEntity> userList = userRepository.findByLoginStatus(authToken);
+		if (authToken.equals(null) || userList == null || userList.size() == 0)
+		{
+			return "{\"result\": \"Invalid LoginStatus\"}";
+		}
+		else
+		{
+			UserEntity userEntity = userList.get(0);
+			userEntity.setLoginStatus(null);
+			userEntity = userRepository.save(userEntity);
+			return "{\"result\": \"Logout Successful\"}";
+		}
+		
+	}
+	
 	@Override
 	public UserProfileJson update(UserProfileJson user, long id) {
-		UserProfileEntity userProfileEntity = userRepository.findByuserId(id).get(0);
+		UserProfileEntity userProfileEntity = userprofileRepository.findByUserId(id).get(0);
 		if(userProfileEntity != null) {
 			userProfileEntity.setUserId(user.getUserId());
 			userProfileEntity.setFirstname(user.getFirstname());
@@ -48,8 +102,8 @@ public class UserServiceImpl implements UserService {
 			userProfileEntity.setEmailId(user.getEmailId());
 
 			//userProfileEntity.setPassword(user.getPassword());
-			userProfileEntity = userRepository.save(userProfileEntity);
-			return UserUtils.convertUserEntityToUserProfileJson(userProfileEntity);
+			userProfileEntity = userprofileRepository.save(userProfileEntity);
+			return UserUtils.convertUserProfileEntityToUserProfileJson(userProfileEntity);
 		}
 		return null;
 	}
@@ -63,7 +117,7 @@ public class UserServiceImpl implements UserService {
 				
 				userEntity.setPassword(user.getPassword());
 				userEntity = userRepository.save(userEntity);
-				return UserUtils.convertUserEntityToUser(userEntity);	
+				return UserUtils.convertUserEntityToUserJson(userEntity);	
 				}
 				else {
 					return null;
@@ -71,10 +125,5 @@ public class UserServiceImpl implements UserService {
 		}
 		return null;
 	}
-	
-	
-	
-	
-
 
 }
