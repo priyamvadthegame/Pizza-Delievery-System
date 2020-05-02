@@ -3,6 +3,7 @@ package com.project.services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import com.project.repositories.StoreRepository;
 import com.project.repositories.UserProfileRepository;
 import com.project.repositories.UserRepository;
 import com.project.utils.FoodUtils;
+import com.project.utils.StoreUtils;
 
 @Service
 public class StoreServiceImpl implements StoreService{
@@ -35,28 +37,57 @@ public class StoreServiceImpl implements StoreService{
 	private static StoreRepository storeRepository;
 	
 	@Override
-	public StoreJson save(StoreJson store) {
-		// TODO Auto-generated method stub
-		return null;
+	public StoreJson registerStore(StoreJson store)
+	{
+		StoreEntity storeEntity =
+				storeRepository.save(StoreUtils.convertStoreJsonToStoreEntity(store));
+		return StoreUtils.convertStoreEntityToStoreJson(storeEntity);
+		
 	}
 
 	@Override
 	public boolean deleteStore(Long id) {
-		// TODO Auto-generated method stub
+List<StoreEntity> userEntity=storeRepository.findByStoreId(id);
+		
+		if(storeRepository.existsById(Long.valueOf(id)))
+		{
+			storeRepository.deleteById(Long.valueOf(id));
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public List<StoreJson> filterStoreByFood(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Set<StoreEntity> requiredStoreList;
+		
+		Optional<FoodEntity> foodEntity=foodRepository.findById(id);
+		requiredStoreList=foodEntity.get().getStoreList();
+		List<StoreEntity> storeList= new ArrayList<StoreEntity>();
+		storeList.addAll(requiredStoreList);
+		return StoreUtils.convertStoreEntityListToStoreJson(storeList);
+
 	}
 
 	@Override
-	public List<StoreJson> getFoodInStore(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Food> getFoodInStore(Long id) {
+		Set<FoodEntity> requiredFoodList;
+		Optional<StoreEntity> storeEntity=storeRepository.findById(id);
+		requiredFoodList=storeEntity.get().getFoodList();
+		List<FoodEntity> foodList= new ArrayList<FoodEntity>();
+		foodList.addAll(requiredFoodList);
+		return FoodUtils.convertFoodEntityListToFoodJson(foodList);
+
+		
 	}
+
+	@Override
+	public StoreJson save(StoreJson store) {
+		StoreEntity storeEntity =
+				storeRepository.save(StoreUtils.convertStoreJsonToStoreEntity(store));
+		return StoreUtils.convertStoreEntityToStoreJson(storeEntity);
+	}
+
 
 	@Override
 	public Food addFoodtoStore(long foodId, long storeId, String sessionId) {

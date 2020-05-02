@@ -16,6 +16,8 @@ public interface StoreService {
 	
 	public boolean deleteStore( Long id);
 	
+	public StoreJson registerStore(StoreJson store);
+	
 	
 	public Food addFoodtoStore(long foodId,long storeId,String sessionId);
 	
@@ -24,7 +26,7 @@ public interface StoreService {
 	
 	public List<StoreJson> filterStoreByFood( Long id);
 	
-	public List<StoreJson> getFoodInStore( Long id);
+	public List<Food> getFoodInStore( Long id);
 	
 	
 	
