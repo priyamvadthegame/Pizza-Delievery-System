@@ -25,22 +25,22 @@ public class UserCreditCardController {
 	private UserCreditCardServices userCreditCardService;
 	
 	@RequestMapping(value="/creditcard",method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
-	public CreditCardJson addCreditCard(@RequestBody CreditCardJson creditCardDetails,@RequestHeader String apiKey) {
+	public CreditCardJson addCreditCard(@RequestBody CreditCardJson creditCardDetails,@RequestHeader(name = "apiKey") String apiKey) {
 		return userCreditCardService.save(creditCardDetails, apiKey);
 	}
 	
 	@RequestMapping(value="/creditcard/verify",method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-	public CreditCardJson verifyCreditCard(@RequestHeader String creditCardNumber,@RequestHeader String apiKey) {
+	public CreditCardJson verifyCreditCard(@RequestHeader String creditCardNumber,@RequestHeader(name = "apiKey") String apiKey) {
 		return userCreditCardService.verify(creditCardNumber,apiKey);
 	}
 	
 	@RequestMapping(value="/creditcard",method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public CreditCardJson deleteCreditCard(@RequestHeader String creditCardNumber,@RequestHeader String apiKey) {
+	public CreditCardJson deleteCreditCard(@RequestHeader String creditCardNumber,@RequestHeader(name = "apiKey") String apiKey) {
 		return userCreditCardService.delete(creditCardNumber,apiKey);
 	}
 	
 	@RequestMapping(value="/creditcard",method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<CreditCardJson> getAllCreditCardOfAUser(@RequestHeader String apiKey) {
+	public List<CreditCardJson> getAllCreditCardOfAUser(@RequestHeader(name = "apiKey") String apiKey) {
 		return userCreditCardService.getAllCreditCards(apiKey);
 	}
 	
