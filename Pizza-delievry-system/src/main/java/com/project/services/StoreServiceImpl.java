@@ -28,18 +28,21 @@ public class StoreServiceImpl implements StoreService{
 
 	
 	@Autowired
-	private static UserRepository userRepository;
+	private  UserRepository userRepository;
 	@Autowired
-	private static UserProfileRepository userProfieRepository;
+	private  UserProfileRepository userProfieRepository;
 	
 	@Autowired
-	private static FoodRepository foodRepository;
+	private  FoodRepository foodRepository;
+	
 	@Autowired
-	private static StoreRepository storeRepository;
+	private  StoreRepository storeRepository;
 	
 	@Override
 	public StoreJson registerStore(StoreJson store)
 	{
+		System.out.println(StoreUtils.convertStoreJsonToStoreEntity(store));
+		System.out.println(storeRepository);
 		StoreEntity storeEntity =
 				storeRepository.save(StoreUtils.convertStoreJsonToStoreEntity(store));
 		return StoreUtils.convertStoreEntityToStoreJson(storeEntity);
@@ -82,12 +85,12 @@ List<StoreEntity> userEntity=storeRepository.findByStoreId(id);
 		
 	}
 
-	@Override
-	public StoreJson save(StoreJson store) {
-		StoreEntity storeEntity =
-				storeRepository.save(StoreUtils.convertStoreJsonToStoreEntity(store));
-		return StoreUtils.convertStoreEntityToStoreJson(storeEntity);
-	}
+//	@Override
+//	public StoreJson save(StoreJson store) {
+//		StoreEntity storeEntity =
+//				storeRepository.save(StoreUtils.convertStoreJsonToStoreEntity(store));
+//		return StoreUtils.convertStoreEntityToStoreJson(storeEntity);
+//	}
 
 
 	@Override
@@ -97,9 +100,10 @@ List<StoreEntity> userEntity=storeRepository.findByStoreId(id);
 		{
 			if(userEntiy.getUsertype().toLowerCase().contains("admin"))
 			{	FoodEntity foodEntityToBeReturned=null;
+				
 				try
 				{
-					StoreEntity storeEntity=storeRepository.findById(foodId).get();
+					StoreEntity storeEntity=storeRepository.findById(storeId).get();
 					FoodEntity foodEntity=foodRepository.findById(foodId).get();
 					storeEntity.getFoodList().add(foodEntity);
 					foodEntity.getStoreList().add(storeEntity);
@@ -133,8 +137,8 @@ List<StoreEntity> userEntity=storeRepository.findByStoreId(id);
 				StoreEntity storeEntityToBeReturned=null;
 				try
 				{
-					StoreEntity storeEntity=storeRepository.findById(foodId).get();
-					FoodEntity foodEntity=foodRepository.findById(foodId).get();
+					StoreEntity storeEntity=storeRepository.findById(Long.valueOf(storeId)).get();
+					FoodEntity foodEntity=foodRepository.findById(Long.valueOf(foodId)).get();
 					storeEntity.getFoodList().remove(foodEntity);
 					foodEntity.getStoreList().remove(storeEntity);
 					storeRepository.save(storeEntity);
@@ -165,7 +169,7 @@ List<StoreEntity> userEntity=storeRepository.findByStoreId(id);
 	}
 	
 	
-	public static  UserEntity getUserEntityBySessionId(String sessionId)
+	public   UserEntity getUserEntityBySessionId(String sessionId)
 	{
 		List<UserEntity> userEntity=userRepository.findByLoginStatus(sessionId);
 		
@@ -179,7 +183,7 @@ List<StoreEntity> userEntity=storeRepository.findByStoreId(id);
 		}
 	}
 	
-	public static UserProfileEntity getUserProfileEntityById(Long userId)
+	public  UserProfileEntity getUserProfileEntityById(Long userId)
 	{
 		List<UserProfileEntity> userProfileEntityList=userProfieRepository.findByUserId(userId);
 		if(userProfileEntityList!=null&&userProfileEntityList.size()>0)
@@ -190,6 +194,13 @@ List<StoreEntity> userEntity=storeRepository.findByStoreId(id);
 		{
 			return null;
 		}
+	}
+
+	@Override
+	public List<StoreJson> getStoreList() {
+		List<StoreEntity> storeEntityList=storeRepository.findAll();
+		return StoreUtils.convertStoreEntityListToStoreJson(storeEntityList);
+		//return null;
 	}
 
 }
