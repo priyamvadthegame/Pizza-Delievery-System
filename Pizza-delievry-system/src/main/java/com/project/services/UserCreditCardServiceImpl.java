@@ -21,23 +21,31 @@ import com.project.utils.UserCreditCardUtils;
 public class UserCreditCardServiceImpl implements UserCreditCardServices {
 
 	@Autowired
-	private static UserRepository userRepository;
+	private UserRepository userRepository;
 	
 	@Autowired
-	private static UserProfileRepository userProfileRepository;
+	private  UserProfileRepository userProfileRepository;
 	
 	@Autowired
-	private static UserCreditCardRepository userCreditCardRepository;
+	private  UserCreditCardRepository userCreditCardRepository;
 	
 	@Override
 	public CreditCardJson save(CreditCardJson creditcardDetails, String sessionId) {
 		UserEntity userEntity=getUserEntityBySessionId(sessionId);
 		if(userEntity!=null)
-		{
-				CreditCardEntity creditCardEntity=UserCreditCardUtils.convertCreditCardJsontoEntity(creditcardDetails);
-				creditCardEntity.setUserId(userEntity);
-				userCreditCardRepository.save(creditCardEntity);
-				return creditcardDetails;
+		{		List<CreditCardEntity> creditCardList=userEntity.getCards();
+				if(!creditCardList.stream().filter((creditCard)->creditCard.getCreditCardNumber().equals(creditcardDetails.getCreditCardNumber())).findAny().isPresent())
+				{
+					CreditCardEntity creditCardEntity=UserCreditCardUtils.convertCreditCardJsontoEntity(creditcardDetails);
+					creditCardEntity.setUserId(userEntity);
+					userCreditCardRepository.save(creditCardEntity);
+					return creditcardDetails;
+				}
+				else
+				{
+					return  new CreditCardJson(0L,"CreditCard already exists","",0.0);
+				}
+				
 		}
 		else
 		{
@@ -53,9 +61,9 @@ public class UserCreditCardServiceImpl implements UserCreditCardServices {
 		if(userEntity!=null)
 		{	
 			List<CreditCardEntity> creditCardList=userEntity.getCards();
-			if(creditCardList.stream().filter((creditCard)->creditCard.getCreditCardNumber().equals(creditCardNumber)).findAny().isPresent())
+			if(creditCardList.stream().filter((creditCard)->creditCard.getCreditCardNumber().equals(Long.valueOf(creditCardNumber))).findAny().isPresent())
 			{
-				return UserCreditCardUtils.convertCreditCardEntitytoJson(creditCardList.stream().filter((creditCard)->creditCard.getCreditCardNumber().equals(creditCardNumber)).collect(Collectors.toList()).get(0));
+				return UserCreditCardUtils.convertCreditCardEntitytoJson(creditCardList.stream().filter((creditCard)->creditCard.getCreditCardNumber().equals(Long.valueOf(creditCardNumber))).collect(Collectors.toList()).get(0));
 			}
 			else
 			{
@@ -74,9 +82,9 @@ public class UserCreditCardServiceImpl implements UserCreditCardServices {
 		if(userEntity!=null)
 		{	
 			List<CreditCardEntity> creditCardList=userEntity.getCards();
-			if(creditCardList.stream().filter((creditCard)->creditCard.getCreditCardNumber().equals(creditCardNumber)).findAny().isPresent())
+			if(creditCardList.stream().filter((creditCard)->creditCard.getCreditCardNumber().equals(Long.valueOf(creditCardNumber))).findAny().isPresent())
 			{
-				CreditCardEntity creditCardToBeDeleted= creditCardList.stream().filter((creditCard)->creditCard.getCreditCardNumber().equals(creditCardNumber)).collect(Collectors.toList()).get(0);
+				CreditCardEntity creditCardToBeDeleted= creditCardList.stream().filter((creditCard)->creditCard.getCreditCardNumber().equals(Long.valueOf(creditCardNumber))).collect(Collectors.toList()).get(0);
 				userCreditCardRepository.delete(creditCardToBeDeleted);
 				return new CreditCardJson(0L,"Credit Card Deleted Successfully","",0.0) ;
 			}
@@ -109,7 +117,7 @@ public class UserCreditCardServiceImpl implements UserCreditCardServices {
 	}
 	
 	
-	public static UserProfileEntity getUserProfileEntityById(Long userId)
+	public  UserProfileEntity getUserProfileEntityById(Long userId)
 	{
 		List<UserProfileEntity> userProfileEntityList=userProfileRepository.findByUserId(userId);
 		if(userProfileEntityList!=null&&userProfileEntityList.size()>0)
@@ -123,7 +131,7 @@ public class UserCreditCardServiceImpl implements UserCreditCardServices {
 	}
 	
 	
-	public static  UserEntity getUserEntityBySessionId(String sessionId)
+	public   UserEntity getUserEntityBySessionId(String sessionId)
 	{
 		List<UserEntity> userEntity=userRepository.findByLoginStatus(sessionId);
 		
