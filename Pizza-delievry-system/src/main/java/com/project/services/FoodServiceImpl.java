@@ -52,6 +52,7 @@ public class FoodServiceImpl implements FoodService {
 			foodEntity.setFoodSize(foodEntity.getFoodSize());
 			foodEntity.setQuantity(foodEntity.getQuantity());
 			foodEntity.setPrice(foodEntity.getPrice());
+			FoodEntity foodEntity1=foodRepository.save(foodEntity);
 			return FoodUtils.convertFoodEntityToFoodJson(foodEntity);
 			
 		}
