@@ -42,5 +42,15 @@ public class UserController {
 	public @ResponseBody String logoutUser(@RequestHeader(name="auth-token") String authToken) {
 		return userService.logout(authToken);
 	}
+	
+	@PostMapping(value="/user/pass",  produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody UserJson changepassword( @RequestHeader(name="oldpassword") String password,@RequestHeader(name="newpassword") String newpassword,@RequestHeader(name="id") String id) {
+		return userService.changepassword(password,newpassword, id);
+	}
+	
+	  @PutMapping(value="/user/uprofile", consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
+	  public @ResponseBody UserProfileJson update(@RequestBody UserProfileJson user, @RequestHeader(name="id") String id) { return
+	  userService.update(user,id); }
+	 
 
 }

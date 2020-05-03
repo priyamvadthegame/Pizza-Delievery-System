@@ -109,10 +109,12 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public UserProfileJson update(UserProfileJson user, long id) {
-		UserProfileEntity userProfileEntity = userprofileRepository.findByUserId(id).get(0);
-		if(userProfileEntity != null) {
-			userProfileEntity.setUserId(user.getUserId());
+	public UserProfileJson update(UserProfileJson user, String id) {
+		
+		UserEntity userEntity=userRepository.findByLoginStatus(id).get(0);
+		UserProfileEntity userProfileEntity =userEntity.getUserprofile();
+		if(userEntity != null) {
+			userProfileEntity.setUserId(userProfileEntity.getUserId());
 			userProfileEntity.setFirstname(user.getFirstname());
 			userProfileEntity.setLastname(user.getLastname());
 			userProfileEntity.setDob(user.getDob());
@@ -124,8 +126,6 @@ public class UserServiceImpl implements UserService {
 			userProfileEntity.setPincode(user.getPincode());
 			userProfileEntity.setMobileno(user.getMobileno());
 			userProfileEntity.setEmailId(user.getEmailId());
-
-			//userProfileEntity.setPassword(user.getPassword());
 			userProfileEntity = userprofileRepository.save(userProfileEntity);
 			return UserUtils.convertUserProfileEntityToUserProfileJson(userProfileEntity);
 		}
@@ -133,13 +133,12 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public UserJson changepassword(UserJson user, String id) {
-		String password = user.getPassword();
-		UserEntity userEntity = userRepository.findById(Long.valueOf(id)).get();
+	public UserJson changepassword(String password,String newpassword, String id) {
+		UserEntity userEntity = userRepository.findByLoginStatus(id).get(0);
 		if(userEntity != null) {
-					if(password.equals(user.getPassword())) {
+					if(password.equals(userEntity.getPassword())) {
 				
-				userEntity.setPassword(user.getPassword());
+				userEntity.setPassword(newpassword);
 				userEntity = userRepository.save(userEntity);
 				return UserUtils.convertUserEntityToUserJson(userEntity);	
 				}
