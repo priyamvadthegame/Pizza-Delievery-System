@@ -47,13 +47,13 @@ public class UserController {
 	}
 	
 	@PostMapping(value="/user/pass",  produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody UserJson changepassword( @RequestParam(name="oldpassword") String password,@RequestParam(name="newpassword") String newpassword,@RequestHeader(name="id") String id) {
-		return userService.changepassword(password,newpassword, id);
+	public @ResponseBody UserJson changepassword( @RequestParam(name="oldpassword") String password,@RequestParam(name="newpassword") String newpassword,@RequestHeader(name="auth-token") String authToken) {
+		return userService.changepassword(password,newpassword, authToken);
 	}
 	
 	@PutMapping(value="/user/uprofile", consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody UserProfileJson update(@RequestBody UserProfileJson user, @RequestHeader(name="id") String id) { 
-		return userService.update(user,id); 
+	public @ResponseBody UserProfileJson update(@RequestBody UserProfileJson user, @RequestHeader(name="auth-token") String authToken) { 
+		return userService.update(user,authToken); 
 	}
 	 
 
