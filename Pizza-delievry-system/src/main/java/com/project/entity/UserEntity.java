@@ -21,7 +21,7 @@ public class UserEntity {
 	
 	@GeneratedValue
 	@Id
-	@Column(name = "USERID")
+	@Column(name = "USER_UNIQUE_ID")
 	private long userId;
 
 	@Column(name = "USERNAME")
@@ -43,12 +43,11 @@ public class UserEntity {
     private List<CartEntity> carts;
 	
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userId")
+	@OneToMany( fetch = FetchType.LAZY, mappedBy = "userId")
 
     private List<CreditCardEntity> cards;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "USERID")
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = UserProfileEntity.class)
     private UserProfileEntity userprofile;
 	
 	public UserEntity() {

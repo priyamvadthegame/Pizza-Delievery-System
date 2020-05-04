@@ -52,13 +52,13 @@ public class FoodController {
 		return regService.sortFoodByPrice();
 	}
 	
-	@GetMapping(value="/food/{searchtext}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Food> filterFoodBySearchText(@PathVariable(name="searchtext") String searchtext){
+	@GetMapping(value="/food/search/{searchtext}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Food> filterFoodBySearchText(@PathVariable(value="searchtext") String searchtext){
 		return regService.filterFoodBySearchText(searchtext);
 	}
 	
-	@GetMapping(value="/food/{type}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Food> filterFoodByType(@PathVariable(name="type") String type){
+	@GetMapping(value="/food/type/{type}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Food> filterFoodByType(@PathVariable(value="type") String type){
 		return regService.filterFoodByType(type);
 	}
 

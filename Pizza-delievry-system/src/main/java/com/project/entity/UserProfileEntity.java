@@ -51,7 +51,7 @@ public class UserProfileEntity {
 	@Column(name = "EMAIL_ID")
 	private String emailId;
 	
-	@OneToOne(mappedBy="userprofile")
+	@OneToOne(targetEntity = UserEntity.class)
 	private UserEntity user;
 	
 	public UserProfileEntity() {

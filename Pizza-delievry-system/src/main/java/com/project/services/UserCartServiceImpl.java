@@ -9,8 +9,6 @@ import com.project.entity.CartEntity;
 import com.project.entity.FoodEntity;
 import com.project.entity.UserEntity;
 import com.project.json.CartJson;
-import com.project.json.UserJson;
-import com.project.json.UserProfileJson;
 import com.project.repositories.FoodRepository;
 import com.project.repositories.UserCartRepository;
 import com.project.repositories.UserRepository;
