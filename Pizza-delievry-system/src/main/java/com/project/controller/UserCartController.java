@@ -27,11 +27,11 @@ public class UserCartController {
 	private UserCartService registrationService;
 
 	@PostMapping(value="/add", produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody CartJson registerUser(@RequestBody CartJson cart,@RequestHeader String sid,@RequestHeader String cartid) {
+	public @ResponseBody CartJson registerUser(@RequestBody CartJson cart,@RequestHeader String sid,@RequestParam String cartid) {
 		return registrationService.additems(cart,sid,cartid);
 	}
 	@DeleteMapping(value="/delete")
-	public CartJson deleteUser(@PathVariable(value="id") String id,@RequestHeader long cartid,@RequestHeader String foodid) {
+	public CartJson deleteUser(@RequestHeader(value="id") String id,@RequestParam long cartid,@RequestParam String foodid) {
 		return registrationService.delete(id,cartid,foodid);
 	}
 

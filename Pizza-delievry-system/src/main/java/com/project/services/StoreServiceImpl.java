@@ -105,11 +105,21 @@ List<StoreEntity> userEntity=storeRepository.findByStoreId(id);
 				{
 					StoreEntity storeEntity=storeRepository.findById(storeId).get();
 					FoodEntity foodEntity=foodRepository.findById(foodId).get();
-					storeEntity.getFoodList().add(foodEntity);
-					foodEntity.getStoreList().add(storeEntity);
-					storeRepository.save(storeEntity);
 					
-					foodEntityToBeReturned=foodEntity;
+					if(!storeEntity.getFoodList().contains(foodEntity))
+					{
+						storeEntity.getFoodList().add(foodEntity);
+						foodEntity.getStoreList().add(storeEntity);
+						storeRepository.save(storeEntity);
+						foodEntityToBeReturned=foodEntity;
+						
+					}
+					else
+					{
+						
+						return new Food(0,"Food of given id is already present in store","","",0,0.0);
+						
+					}
 				}
 				catch (NoSuchElementException e) {
 					e.printStackTrace();
@@ -140,26 +150,39 @@ List<StoreEntity> userEntity=storeRepository.findByStoreId(id);
 				{
 					StoreEntity storeEntity=storeRepository.findById(Long.valueOf(storeId)).get();
 					FoodEntity foodEntity=foodRepository.findById(Long.valueOf(foodId)).get();
-					storeEntity.getFoodList().remove(foodEntity);
-					foodEntity.getStoreList().remove(storeEntity);
-					storeRepository.save(storeEntity);
+					if(storeEntity.getFoodList().contains(foodEntity))
+					{
+						storeEntity.getFoodList().remove(foodEntity);
+						foodEntity.getStoreList().remove(storeEntity);
+						storeRepository.save(storeEntity);
+						storeEntityToBeReturned=storeEntity;
+						
+					}
+					else
+					{
+						List<Food> errorList=new ArrayList<Food>();
+						errorList.add(new Food(0,"No Food Of Particular Id Present","","",0,0.0));
+						return errorList;
+					}
+				}
 					
-					storeEntityToBeReturned=storeEntity;
-				}
-				catch (NoSuchElementException e) {
-					e.printStackTrace();
-				}
+					catch (NoSuchElementException e) {
+						e.printStackTrace();
+					}
 				List<Food> returnList=new ArrayList<Food>();
 				storeEntityToBeReturned.getFoodList().stream().forEach(food->returnList.add(FoodUtils.convertFoodEntityToFoodJson(food)));
 				return returnList ;
 			}
-			else
-			{	List<Food> errorList=new ArrayList<Food>();
-				 errorList.add(new Food(0,"You cannot add food as you are not an admin please have an admin access to continue","","",0,0.0));
-				 return errorList;
-			}
+					
+					
+					else
+					{	List<Food> errorList=new ArrayList<Food>();
+						errorList.add(new Food(0,"You cannot add food as you are not an admin please have an admin access to continue","","",0,0.0));
+						return errorList;
+					}
+				
 		}
-	
+			
 		else
 		{	
 			List<Food> errorList=new ArrayList<Food>();

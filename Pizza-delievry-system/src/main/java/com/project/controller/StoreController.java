@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.json.Food;
@@ -31,7 +32,7 @@ public class StoreController {
 	private StoreService storeService;
 	
 	@GetMapping(value="/store")
-	public List<StoreJson> getAllFood(){
+	public List<StoreJson> getAllStore(){
 		return storeService.getStoreList();
 	}
 	
@@ -42,23 +43,23 @@ public class StoreController {
 	}
 		
 	@DeleteMapping(value="/store/{id}")
-	public boolean deleteStore(@PathVariable(value="id") Long id) {
-			return storeService.deleteStore(id);
+	public boolean deleteStore(@PathVariable(value="storeId") String storeId) {
+			return storeService.deleteStore(Long.valueOf(storeId));
 		}
 	
 	@GetMapping(value="/store/food/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<StoreJson> filterStoreByFood(@PathVariable(value="id") Long id){
-		return storeService.filterStoreByFood(id);
+	public List<StoreJson> filterStoreByFood(@PathVariable(value="foodId") String foodId){
+		return storeService.filterStoreByFood(Long.valueOf(foodId) );
 	}
 	
 	@PostMapping(value="/store1/food", produces=MediaType.APPLICATION_JSON_VALUE)
-	public Food addFoodToStore(@RequestHeader(name = "foodId")long foodId,@RequestHeader(name = "storeId")long storeId,@RequestHeader(name = "authToken")String authToken){
+	public Food addFoodToStore(@RequestParam(name = "foodId")long foodId,@RequestParam(name = "storeId")long storeId,@RequestHeader(name = "authToken")String authToken){
 		return storeService.addFoodtoStore(foodId, storeId, authToken);
 	}
 	
 	@DeleteMapping(value="/store/food", produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Food> deleteFoodFromStore(@RequestHeader(name = "foodId")long foodId,@RequestHeader(name = "storeId")long storeId,@RequestHeader(name = "authToken")String authToken){
-		return storeService.deleteFoodFromStore(foodId, storeId, authToken);
+	public List<Food> deleteFoodFromStore(@RequestParam(name = "foodId")String foodId,@RequestParam(name = "storeId")String storeId,@RequestHeader(name = "authToken")String authToken){
+		return storeService.deleteFoodFromStore(Long.valueOf(foodId), Long.valueOf(storeId), authToken);
 	}
 	
 	
