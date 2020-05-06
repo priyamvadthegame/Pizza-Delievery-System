@@ -35,7 +35,7 @@ public class UserCartServiceImpl implements UserCartService {
 		{	
 			UserEntity userEntity=userEntitylist.get(0);
 			CartEntity cartToPersist=UserCartUtils.convertCartJsonToCartEntity(cart);
-			cartToPersist.setUser(userEntity);
+			//cartToPersist.setUser(userEntity);
 			cartToPersist=cartRepository.save(cartToPersist);
 			return UserCartUtils.convertCartEntityToCartJson(cartToPersist);
 		}

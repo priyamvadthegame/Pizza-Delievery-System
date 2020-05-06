@@ -6,7 +6,7 @@ import com.project.json.OrderJson;
 
 public interface OrderService {
 
-	 public OrderJson save(OrderJson order, String authToken, long cartId);
+	 public OrderJson save(OrderJson order, String authToken,String [] foodList,long Price,long storeId);
 
 	public List<OrderJson> getOrderBySessionId(String authToken);
     
