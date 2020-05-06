@@ -1,6 +1,7 @@
 package com.project.services;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,12 +9,18 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.project.entity.CartEntity;
+import com.project.entity.FoodEntity;
 import com.project.entity.OrderEntity;
+import com.project.entity.StoreEntity;
 import com.project.entity.UserEntity;
 import com.project.json.OrderJson;
+import com.project.repositories.FoodRepository;
 import com.project.repositories.OrderRepository;
+import com.project.repositories.StoreRepository;
+import com.project.repositories.UserCartRepository;
 import com.project.repositories.UserRepository;
 import com.project.utils.OrderUtils;
+import com.project.utils.StoreUtils;
 
 
 @Service
@@ -23,33 +30,54 @@ public class OrderServiceImpl implements OrderService {
 	private OrderRepository orderRepository;
 	
 	@Autowired
-	private static UserRepository userRepository;
+	private  UserRepository userRepository;
+	
+	@Autowired
+	private  FoodRepository foodRepository;
+	
+	@Autowired
+	private  UserCartRepository cartRepository;
+	@Autowired
+	private  StoreRepository storecartRepository;
 
 	@Override
-	public OrderJson save(OrderJson order, String authToken,long cartId) {
+	public OrderJson save(OrderJson order, String authToken,String foodArray[],long price,long storeId) {
 	
 		
 		UserEntity userEntity=getUserEntityBySessionId(authToken);
 		if(userEntity!=null)
 		{
-			List<CartEntity> cartEntity =userEntity.getCarts(); 
-			
-			if(cartEntity.stream().filter(cart -> cart.getCartId()==cartId ).findAny().isPresent()) 
-			{
-				CartEntity cart=cartEntity.stream().filter(cart1 -> cart1.getCartId()==cartId ).collect(Collectors.toList()).get(0);
 				OrderEntity orderEntity=OrderUtils.convertOrderJsontoEntity(order);
-				orderEntity.setCartId(cart);
+				StoreEntity storeEntity=storecartRepository.findById(storeId).get();
+				List<FoodEntity> foodlist=new ArrayList<>();
+				CartEntity cartEntity =new CartEntity();
+				for(String food : foodArray)
+				{	System.out.println(food);
+					FoodEntity foodEntity =foodRepository.findById(Long.valueOf(food)).get();
+					
+					foodlist.add(foodEntity);
+				
+					
+				}
+				cartEntity.setFoodList(foodlist);
+				cartEntity.setUser(userEntity);
+				cartEntity.setPrice(Integer.valueOf(String.valueOf(price)));
+				cartEntity.setDate(LocalDate.now());
+				cartEntity=cartRepository.save(cartEntity);
+				for(String food : foodArray)
+				{	FoodEntity foodEntity =foodRepository.findById(Long.valueOf(food)).get();
+					
+					foodEntity.getCartEntity().add(cartEntity);
+				}
+				orderEntity.setCartId(cartEntity);
+				orderEntity.setStoreId(storeEntity);
 				orderEntity.setUserId(userEntity);
-				orderRepository.save(orderEntity);
+				orderEntity=orderRepository.save(orderEntity);
 				
 				return OrderUtils.convertOrderEntitytoJson(orderEntity);
 			}
-			else {
 				
-				return new OrderJson("This Cart not available with the given id","","","",0L,0);
-			}
-				
-		}
+		
 		else
 		{
 			return new OrderJson("Your session has expired. Please login to continue.","","","",0L,0);
@@ -89,7 +117,7 @@ public class OrderServiceImpl implements OrderService {
 		}
 	}
 
-	public static  UserEntity getUserEntityBySessionId(String sessionId)
+	public  UserEntity getUserEntityBySessionId(String sessionId)
 	{
 		List<UserEntity> userEntity=userRepository.findByLoginStatus(sessionId);
 		

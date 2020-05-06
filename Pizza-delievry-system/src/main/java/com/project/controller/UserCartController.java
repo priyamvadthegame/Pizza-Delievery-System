@@ -27,7 +27,7 @@ public class UserCartController {
 	private UserCartService registrationService;
 
 	@PostMapping(value="/add/{id}", produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody CartJson registerUser(@RequestBody CartJson cart,@RequestHeader String sid,@RequestHeader String cartid) {
+	public @ResponseBody CartJson registerUser(@RequestBody CartJson cart,@RequestParam String sid,@RequestHeader String cartid) {
 		return registrationService.additems(cart,sid,cartid);
 	}
 	@DeleteMapping(value="/delete/{id}")

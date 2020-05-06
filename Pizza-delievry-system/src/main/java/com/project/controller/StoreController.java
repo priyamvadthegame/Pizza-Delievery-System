@@ -48,8 +48,8 @@ public class StoreController {
 		}
 	
 	@GetMapping(value="/store/food/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<StoreJson> filterStoreByFood(@PathVariable(value="id") Long id){
-		return storeService.filterStoreByFood(id);
+	public List<StoreJson> filterStoreByFood(@PathVariable(value="id") String id){
+		return storeService.filterStoreByFood(Long.valueOf(id));
 	}
 	
 	@PostMapping(value="/store1/food", produces=MediaType.APPLICATION_JSON_VALUE)
