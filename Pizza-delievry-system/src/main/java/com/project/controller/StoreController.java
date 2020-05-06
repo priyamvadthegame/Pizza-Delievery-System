@@ -32,7 +32,7 @@ public class StoreController {
 	private StoreService storeService;
 	
 	@GetMapping(value="/store")
-	public List<StoreJson> getAllFood(){
+	public List<StoreJson> getAllStore(){
 		return storeService.getStoreList();
 	}
 	
@@ -43,13 +43,15 @@ public class StoreController {
 	}
 		
 	@DeleteMapping(value="/store/{id}")
-	public boolean deleteStore(@PathVariable(value="id") Long id) {
-			return storeService.deleteStore(id);
+	public boolean deleteStore(@PathVariable(value="storeId") String storeId) {
+			return storeService.deleteStore(Long.valueOf(storeId));
 		}
 	
 	@GetMapping(value="/store/food/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<StoreJson> filterStoreByFood(@PathVariable(value="id") String id){
-		return storeService.filterStoreByFood(Long.valueOf(id));
+
+	public List<StoreJson> filterStoreByFood(@PathVariable(value="foodId") String foodId){
+		return storeService.filterStoreByFood(Long.valueOf(foodId) );
+
 	}
 	
 	@PostMapping(value="/store1/food", produces=MediaType.APPLICATION_JSON_VALUE)

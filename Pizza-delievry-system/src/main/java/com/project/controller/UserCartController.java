@@ -26,12 +26,14 @@ public class UserCartController {
 	@Autowired
 	private UserCartService registrationService;
 
-	@PostMapping(value="/add/{id}", produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody CartJson registerUser(@RequestBody CartJson cart,@RequestParam String sid,@RequestHeader String cartid) {
+
+	@PostMapping(value="/add", produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody CartJson registerUser(@RequestBody CartJson cart,@RequestHeader String sid,@RequestParam String cartid) {
+
 		return registrationService.additems(cart,sid,cartid);
 	}
-	@DeleteMapping(value="/delete/{id}")
-	public CartJson deleteUser(@PathVariable(value="id") String id,@RequestHeader long cartid,@RequestHeader String foodid) {
+	@DeleteMapping(value="/delete")
+	public CartJson deleteUser(@RequestHeader(value="id") String id,@RequestParam long cartid,@RequestParam String foodid) {
 		return registrationService.delete(id,cartid,foodid);
 	}
 
