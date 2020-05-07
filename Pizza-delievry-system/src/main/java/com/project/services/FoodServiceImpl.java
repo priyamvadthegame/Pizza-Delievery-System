@@ -23,8 +23,8 @@ public class FoodServiceImpl implements FoodService {
 	private UserRepository userRepository;
 
 	@Override
-	public boolean delete(String id) {
-		List<UserEntity> userEntity=userRepository.findByLoginStatus(id);
+	public boolean delete(Long id,String sessionId) {
+		List<UserEntity> userEntity=userRepository.findByLoginStatus(sessionId);
 		
 		if(foodRepository.existsById(Long.valueOf(id)))
 		{

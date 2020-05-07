@@ -14,7 +14,7 @@ import com.project.json.Food;
 
 public interface FoodService {
 
-	public boolean delete(String id);
+	public boolean delete(Long id,String sessionId);
 	public Food save(Food food,String id);
 	public Food update(Food food, String id);
 	public List<Food> getAllFood();

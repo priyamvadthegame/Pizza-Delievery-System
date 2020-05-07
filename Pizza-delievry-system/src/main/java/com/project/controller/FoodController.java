@@ -44,8 +44,8 @@ public class FoodController {
 	}
 	
 	@DeleteMapping(value="/food/{id}")
-	public boolean deleteFood(@PathVariable(value="id") String id) {
-		return regService.delete(id);
+	public boolean deleteFood(@PathVariable(value="id") String id,@RequestHeader(name="auth-token")String sessionId) {
+		return regService.delete(Long.valueOf(id),sessionId);
 	}
 	
 	@GetMapping(value="/food/sort/price", produces=MediaType.APPLICATION_JSON_VALUE)
