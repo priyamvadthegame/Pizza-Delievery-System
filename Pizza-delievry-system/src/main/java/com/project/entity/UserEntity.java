@@ -47,7 +47,7 @@ public class UserEntity {
 
     private List<CreditCardEntity> cards;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = UserProfileEntity.class)
+	@OneToOne( targetEntity = UserProfileEntity.class)
     private UserProfileEntity userprofile;
 	
 	public UserEntity() {

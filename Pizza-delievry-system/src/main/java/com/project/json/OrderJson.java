@@ -25,7 +25,7 @@ public class OrderJson {
 	private long pincode;
 	
 	
-	private int mobileNo;
+	private String mobileNo;
 	
 
 	public OrderJson() {
@@ -34,7 +34,7 @@ public class OrderJson {
 	}
 
 
-	public OrderJson( String orderStatus, String street, String city, String state, long pincode, int mobileNo) {
+	public OrderJson( String orderStatus, String street, String city, String state, long pincode, String mobileNo) {
 		super();
 		
 		this.orderStatus = orderStatus;
@@ -47,7 +47,7 @@ public class OrderJson {
 
 
 	public OrderJson(long orderId,  String orderStatus, String street, String city, String state, long pincode,
-			int mobileNo) {
+			String mobileNo) {
 		super();
 		this.orderId = orderId;
 		this.orderStatus = orderStatus;
@@ -118,12 +118,12 @@ public class OrderJson {
 	}
 
 
-	public int getMobileNo() {
+	public String getMobileNo() {
 		return mobileNo;
 	}
 
 
-	public void setMobileNo(int mobileNo) {
+	public void setMobileNo(String mobileNo) {
 		this.mobileNo = mobileNo;
 	}
 

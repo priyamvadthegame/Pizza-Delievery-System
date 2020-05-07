@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
 				loginStatus = Integer.toString(random.nextInt(500000));
 				userEntity.setLoginStatus(loginStatus);
 				userRepository.save(userEntity);
-				return "{ \"result\": \"success\", \"message\": \"Login successful\", \"auth-token\":\"" + loginStatus + "\"}";	
+				return "{ \"result\": \"success\", \"message\": \"Login successful\", \"authtoken\":\"" + loginStatus + "\"}";	
 			}
 			else
 			{
@@ -133,14 +133,14 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public UserJson changepassword(String password,String newpassword, String id) {
+	public UserProfileJson changepassword(String password,String newpassword, String id) {
 		UserEntity userEntity = userRepository.findByLoginStatus(id).get(0);
 		if(userEntity != null) {
 					if(password.equals(userEntity.getPassword())) {
 				
 				userEntity.setPassword(newpassword);
 				userEntity = userRepository.save(userEntity);
-				return UserUtils.convertUserEntityToUserJson(userEntity);	
+				return UserUtils.convertUserProfileEntityToUserProfileJson(userEntity.getUserprofile());	
 				}
 				else {
 					return null;

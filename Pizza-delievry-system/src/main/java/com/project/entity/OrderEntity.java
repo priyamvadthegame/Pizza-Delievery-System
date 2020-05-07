@@ -39,7 +39,7 @@ public class OrderEntity {
 	private long pincode;
 	
 	@Column(name = "mobile")
-	private int mobileNo;
+	private String mobileNo;
 	
 	
 	@ManyToOne
@@ -56,7 +56,7 @@ public class OrderEntity {
 	}
 
 	public OrderEntity( String orderStatus, String street, String city, String state, long pincode,
-			int mobileNo) {
+			String mobileNo) {
 		super();
 		this.orderStatus = orderStatus;
 		Street = street;
@@ -122,11 +122,11 @@ public class OrderEntity {
 		this.pincode = pincode;
 	}
 
-	public int getMobileNo() {
+	public String getMobileNo() {
 		return mobileNo;
 	}
 
-	public void setMobileNo(int mobileNo) {
+	public void setMobileNo(String mobileNo) {
 		this.mobileNo = mobileNo;
 	}
 

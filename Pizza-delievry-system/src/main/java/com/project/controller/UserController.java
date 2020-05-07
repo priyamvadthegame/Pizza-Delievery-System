@@ -47,7 +47,7 @@ public class UserController {
 	}
 	
 	@PostMapping(value="/user/pass",  produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody UserJson changepassword( @RequestParam(name="oldpassword") String password,@RequestParam(name="newpassword") String newpassword,@RequestHeader(name="auth-token") String authToken) {
+	public @ResponseBody UserProfileJson changepassword( @RequestParam(name="oldpassword") String password,@RequestParam(name="newpassword") String newpassword,@RequestHeader(name="auth-token") String authToken) {
 		return userService.changepassword(password,newpassword, authToken);
 	}
 	

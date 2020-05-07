@@ -11,7 +11,7 @@ public interface UserService {
 	public String login(UserJson user);
 	
 	public UserProfileJson userInfo(String authToken);
-	public UserJson changepassword(String password,String newpassword, String id);
+	public UserProfileJson changepassword(String password,String newpassword, String id);
 	public UserProfileJson update(UserProfileJson user, String id);
 	
 	public String logout(String authToken);

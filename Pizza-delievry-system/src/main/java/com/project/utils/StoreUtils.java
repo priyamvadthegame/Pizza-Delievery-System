@@ -20,7 +20,7 @@ public class StoreUtils {
 	
 	public static StoreJson convertStoreEntityToStoreJson(StoreEntity storeEntity)
 	{
-		return new StoreJson(storeEntity.getStoreName(),storeEntity.getStoreStreet(),storeEntity.getStoreMobileNo(),storeEntity.getStoreCity(),storeEntity.getStoreState(),storeEntity.getStorePincode());
+		return new StoreJson(storeEntity.getStoreId(),storeEntity.getStoreName(),storeEntity.getStoreStreet(),storeEntity.getStoreMobileNo(),storeEntity.getStoreCity(),storeEntity.getStoreState(),storeEntity.getStorePincode());
 	}
 	
 	public static StoreEntity convertStoreJsonToStoreEntity(StoreJson store)

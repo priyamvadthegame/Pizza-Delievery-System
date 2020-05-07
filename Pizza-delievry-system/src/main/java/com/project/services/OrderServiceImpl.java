@@ -54,7 +54,7 @@ public class OrderServiceImpl implements OrderService {
 				for(String food : foodArray)
 				{	System.out.println(food);
 					FoodEntity foodEntity =foodRepository.findById(Long.valueOf(food)).get();
-					
+					foodEntity.getCartEntity().add(cartEntity);
 					foodlist.add(foodEntity);
 				
 					
@@ -80,7 +80,7 @@ public class OrderServiceImpl implements OrderService {
 		
 		else
 		{
-			return new OrderJson("Your session has expired. Please login to continue.","","","",0L,0);
+			return new OrderJson("Your session has expired. Please login to continue.","","","",0L,"");
 		}
 		
 	}
@@ -95,7 +95,7 @@ public class OrderServiceImpl implements OrderService {
 		}
 		else {
 			List<OrderJson> errorList= new ArrayList<OrderJson> ();
-					errorList.add( new OrderJson("Your session has expired. Please login to continue.","","","",0L,0));
+					errorList.add( new OrderJson("Your session has expired. Please login to continue.","","","",0L,""));
 			return errorList;
 		}
 		
@@ -112,7 +112,7 @@ public class OrderServiceImpl implements OrderService {
 		}
 		else {
 			List<OrderJson> errorList= new ArrayList<OrderJson> ();
-					errorList.add( new OrderJson("Your session has expired. Please login to continue.","","","",0L,0));
+					errorList.add( new OrderJson("Your session has expired. Please login to continue.","","","",0L,""));
 			return errorList;
 		}
 	}
