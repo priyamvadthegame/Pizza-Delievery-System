@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
 		List<UserEntity> userList = userRepository.findByUsername(username);
 		if(userList == null || userList.size() == 0)
 		{
-			return "{ \"result\": \"failed\", \"message\": \"Invalid user\" " + username + "}";
+			return "{ \"result\": \"failed\", \"message\": \"Invalid user " + username + "\"}";
 		}
 		else
 		{
