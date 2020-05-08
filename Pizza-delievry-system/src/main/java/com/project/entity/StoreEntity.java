@@ -31,13 +31,13 @@ public class StoreEntity {
 	private String storeStreet;
 	
 	@Column(name = "store_mobile")
-	private int storeMobileNo;
+	private String storeMobileNo;
 	
 	@Column(name = "store_city")
 	private String storeCity;
 	
 	@Column(name = "store_state")
-	private long storeState;
+	private String storeState;
 	
 	@Column(name = "store_pincode")
 	private long storePincode;
@@ -54,7 +54,7 @@ public class StoreEntity {
 		super();
 	}
 
-	public StoreEntity(String storeName, String storeStreet, int storeMobileNo, String storeCity, long storeState,
+	public StoreEntity(String storeName, String storeStreet, String storeMobileNo, String storeCity, String storeState,
 			long storePincode) {
 		super();
 		this.storeName = storeName;
@@ -89,11 +89,11 @@ public class StoreEntity {
 		this.storeStreet = storeStreet;
 	}
 
-	public int getStoreMobileNo() {
+	public String getStoreMobileNo() {
 		return storeMobileNo;
 	}
 
-	public void setStoreMobileNo(int storeMobileNo) {
+	public void setStoreMobileNo(String storeMobileNo) {
 		this.storeMobileNo = storeMobileNo;
 	}
 
@@ -105,11 +105,11 @@ public class StoreEntity {
 		this.storeCity = storeCity;
 	}
 
-	public long getStoreState() {
+	public String getStoreState() {
 		return storeState;
 	}
 
-	public void setStoreState(long storeState) {
+	public void setStoreState(String storeState) {
 		this.storeState = storeState;
 	}
 

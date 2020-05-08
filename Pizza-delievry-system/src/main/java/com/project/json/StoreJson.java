@@ -12,13 +12,13 @@ public class StoreJson {
 	private String storeStreet;
 	
 	
-	private int storeMobileNo;
+	private String storeMobileNo;
 	
 	
 	private String storeCity;
 	
 	
-	private long storeState;
+	private String storeState;
 	
 	
 	private long storePincode;
@@ -30,8 +30,8 @@ public class StoreJson {
 	}
 
 
-	public StoreJson(long storeId, String storeName, String storeStreet, int storeMobileNo, String storeCity,
-			long storeState, long storePincode) {
+	public StoreJson(long storeId, String storeName, String storeStreet, String storeMobileNo, String storeCity,
+			String storeState, long storePincode) {
 		super();
 		this.storeId = storeId;
 		this.storeName = storeName;
@@ -43,7 +43,7 @@ public class StoreJson {
 	}
 
 
-	public StoreJson(String storeName, String storeStreet, int storeMobileNo, String storeCity, long storeState,
+	public StoreJson(String storeName, String storeStreet, String storeMobileNo, String storeCity, String storeState,
 			long storePincode) {
 		super();
 		this.storeName = storeName;
@@ -85,12 +85,12 @@ public class StoreJson {
 	}
 
 
-	public int getStoreMobileNo() {
+	public String getStoreMobileNo() {
 		return storeMobileNo;
 	}
 
 
-	public void setStoreMobileNo(int storeMobileNo) {
+	public void setStoreMobileNo(String storeMobileNo) {
 		this.storeMobileNo = storeMobileNo;
 	}
 
@@ -105,12 +105,12 @@ public class StoreJson {
 	}
 
 
-	public long getStoreState() {
+	public String getStoreState() {
 		return storeState;
 	}
 
 
-	public void setStoreState(long storeState) {
+	public void setStoreState(String storeState) {
 		this.storeState = storeState;
 	}
 
