@@ -23,8 +23,8 @@ public class FoodServiceImpl implements FoodService {
 	private UserRepository userRepository;
 
 	@Override
-	public boolean delete(String id) {
-		List<UserEntity> userEntity=userRepository.findByLoginStatus(id);
+	public boolean delete(Long id,String sessionId) {
+		List<UserEntity> userEntity=userRepository.findByLoginStatus(sessionId);
 		
 		if(foodRepository.existsById(Long.valueOf(id)))
 		{
@@ -47,13 +47,13 @@ public class FoodServiceImpl implements FoodService {
 		List<UserEntity> userEntity=userRepository.findByLoginStatus(id);
 		FoodEntity foodEntity=foodRepository.findById(Long.valueOf(id)).get();
 		if(foodEntity!=null) {
-			foodEntity.setFoodName(foodEntity.getFoodName());
-			foodEntity.setFoodType(foodEntity.getFoodType());
-			foodEntity.setFoodSize(foodEntity.getFoodSize());
-			foodEntity.setQuantity(foodEntity.getQuantity());
-			foodEntity.setPrice(foodEntity.getPrice());
+			foodEntity.setFoodName(food.getFoodName());
+			foodEntity.setFoodType(food.getFoodType());
+			foodEntity.setFoodSize(food.getFoodSize());
+			foodEntity.setQuantity(food.getQuantity());
+			foodEntity.setPrice(food.getPrice());
 			FoodEntity foodEntity1=foodRepository.save(foodEntity);
-			return FoodUtils.convertFoodEntityToFoodJson(foodEntity);
+			return FoodUtils.convertFoodEntityToFoodJson(foodEntity1);
 			
 		}
 		return null;

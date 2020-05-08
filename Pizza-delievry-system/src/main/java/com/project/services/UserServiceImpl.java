@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
 		List<UserEntity> userList = userRepository.findByUsername(username);
 		if(userList == null || userList.size() == 0)
 		{
-			return "{ \"result\": \"failed\", \"message\": \"Invalid user\" " + username + "}";
+			return "{ \"result\": \"failed\", \"message\": \"Invalid user " + username + "\"}";
 		}
 		else
 		{
@@ -66,8 +66,8 @@ public class UserServiceImpl implements UserService {
 			{
 				loginStatus = Integer.toString(random.nextInt(500000));
 				userEntity.setLoginStatus(loginStatus);
-				userRepository.save(userEntity);
-				return "{ \"result\": \"success\", \"message\": \"Login successful\", \"authtoken\":\"" + loginStatus + "\"}";	
+				userEntity=userRepository.save(userEntity);
+				return "{ \"result\": \"success\", \"message\": \"Login successful\", \"authtoken\":\"" + loginStatus +"\",\"usertype\":\""+userEntity.getUsertype()+"\"}";	
 			}
 			else
 			{
