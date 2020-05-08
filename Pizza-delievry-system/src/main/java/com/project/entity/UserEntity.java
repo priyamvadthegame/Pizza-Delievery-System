@@ -43,7 +43,7 @@ public class UserEntity {
     private List<CartEntity> carts;
 	
 
-	@OneToMany( fetch = FetchType.LAZY, mappedBy = "userId")
+	@OneToMany( mappedBy = "userId")
 
     private List<CreditCardEntity> cards;
 	

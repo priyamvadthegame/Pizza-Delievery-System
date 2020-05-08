@@ -37,20 +37,12 @@ public class FoodEntity {
 	@Column(name = "FOOD_PRICE")
 	private double price;
 	
-	@ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                CascadeType.PERSIST,
-                CascadeType.MERGE
-            },
+	@ManyToMany(
+            
             mappedBy = "foodList")
 	private Set<StoreEntity> storeList;
 	
-	@ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                CascadeType.PERSIST,
-                CascadeType.MERGE
-            },
-            mappedBy = "foodList")
+	@ManyToMany(mappedBy = "foodList")
 	private List<CartEntity> cartEntity;
 
 public Set<StoreEntity> getStoreList() {

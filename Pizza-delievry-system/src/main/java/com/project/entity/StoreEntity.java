@@ -42,11 +42,7 @@ public class StoreEntity {
 	@Column(name = "store_pincode")
 	private long storePincode;
 	
-	@ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                CascadeType.PERSIST,
-                CascadeType.MERGE
-            })
+	@ManyToMany()
 	@JoinTable(name = "store_food_table",joinColumns = {@JoinColumn(name = "store_id")},inverseJoinColumns= {@JoinColumn(name ="food_id")})
 	private Set<FoodEntity> foodList;
 

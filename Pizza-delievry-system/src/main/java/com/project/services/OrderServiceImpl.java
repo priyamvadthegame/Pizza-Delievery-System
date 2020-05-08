@@ -48,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
 		if(userEntity!=null)
 		{
 				OrderEntity orderEntity=OrderUtils.convertOrderJsontoEntity(order);
-				StoreEntity storeEntity=storecartRepository.findById(storeId).get();
+				//StoreEntity storeEntity=storecartRepository.findById(storeId).get();
 				List<FoodEntity> foodlist=new ArrayList<>();
 				CartEntity cartEntity =new CartEntity();
 				for(String food : foodArray)
@@ -70,7 +70,7 @@ public class OrderServiceImpl implements OrderService {
 					foodEntity.getCartEntity().add(cartEntity);
 				}
 				orderEntity.setCartId(cartEntity);
-				orderEntity.setStoreId(storeEntity);
+				//orderEntity.setStoreId(storeEntity);
 				orderEntity.setUserId(userEntity);
 				orderEntity=orderRepository.save(orderEntity);
 				
